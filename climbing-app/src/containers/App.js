@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import Router from '../Router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
@@ -16,7 +16,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class App extends Component {
   render() {
     return (
-    <h1>Hello</h1>
+      <div>
+        <ul>
+          <li>Home</li>
+        </ul>
+
+        <hr/>
+
+        <Router />
+      </div>
     );
   }
 }
