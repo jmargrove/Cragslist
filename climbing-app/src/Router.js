@@ -15,8 +15,15 @@ const Routes = () => (
       <Route exact path="/" component={DashboardContainer}/>
       <Route path="/sign-in" component={SignIn}/>
       <Route path="/me" component={User}/>
+      <Route path="/rating" component={Rating}/>
     </Switch>
   </Router>
+)
+
+const Rating = () => (
+  <div>
+    <h2>Home</h2>
+  </div>
 )
 
 const SignIn = () => (

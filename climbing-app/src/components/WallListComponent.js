@@ -1,5 +1,8 @@
 import React from 'react';
 
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+
 class WallListComponent extends React.Component {
 
   renderWallLable = () => {
@@ -8,11 +11,14 @@ class WallListComponent extends React.Component {
       var results = this.props.allWalls.map(wall => {
         return (
           <div className="WallLable" key={wall._id}>
-            <div className="ImgPreview">
-              <img className="ImgPrev" alt={wall.name} src={wall.path}/>
-            </div>
-            {wall.name}
-          </div>
+          <Card>
+            <CardMedia
+              overlay={<CardTitle title={wall.name} subtitle={wall.difficulty} />}
+            >
+              <img src={wall.path} alt="" />
+            </CardMedia>
+          </Card>
+        </div>
         )
       });
       return results;
@@ -21,7 +27,7 @@ class WallListComponent extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="WallList">
         {this.renderWallLable()}
       </div>
     )
@@ -30,3 +36,25 @@ class WallListComponent extends React.Component {
 }
 
 export default WallListComponent;
+
+
+
+
+
+
+
+
+
+
+
+// {/* <div className="WallLable" key={wall._id}>
+// //   <div className="ImgPreview">
+// //     <img className="ImgPrev" alt={wall.name} src={wall.path}/>
+// //   </div>
+// //   <div className="NameLable">
+// //     {wall.name}
+// //   </div>
+// //   <div className="DifficultyLabel">
+// //     {wall.difficulty}
+// //   </div>
+// // </div> */}

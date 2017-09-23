@@ -1,9 +1,21 @@
-.ImgPrev {
-  width:80%;
-  height:10%;
+.WallLable {
+  display: flex;
+  width:40%;
+  flex-grow:2;
+  flex-basis: auto;
+  padding: 3px;
 }
 
-.ImgPreview {
-  width:80%;
-  height:10%;
+.WallList {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 80%;
+}
+
+.Dashboard {
+  display: flex;
+  justify-content: center;
 }
