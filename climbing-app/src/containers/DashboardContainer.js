@@ -1,10 +1,13 @@
 import React from 'react';
 
+import WallListComponent from '../components/WallListComponent';
+
 class DashboardComponent extends React.Component {
 
   constructor(props) {
     super(props);
     this.fetchWalls();
+    this.state = {walls: ''};
   }
 
   Sort (a, b) {
@@ -17,16 +20,18 @@ class DashboardComponent extends React.Component {
     .then(walls => {
       console.log(walls);
       console.log(walls.sort(this.Sort));
-      return;
+      return walls;
+    })
+    .then(fetchedWalls => {
+      this.setState({walls: fetchedWalls});
+      console.log(this.state);
     })
   }
 
   render () {
     return (
-      <div className="DashboardMain">
-        <div className="WallList">
-          <div className="WallLabel"></div>
-        </div>
+      <div className="Dashboard">
+        <WallListComponent allWalls={this.state.walls} />
       </div>
     )
   }
