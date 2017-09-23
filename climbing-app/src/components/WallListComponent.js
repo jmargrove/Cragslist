@@ -2,24 +2,28 @@ import React from 'react';
 
 class WallListComponent extends React.Component {
 
-  constructor (props) {
-    super(props);
-
-  }
-  renderWallLable () {
+  renderWallLable = () => {
     console.log(this.props.allWalls);
-    return this.props.allWalls.map(wall => {
-      console.log(wall);
-      return <div className="WallLable">
-        {wall.name}
-      </div>
-    })
+    if (this.props.allWalls) {
+      var results = this.props.allWalls.map(wall => {
+        return (
+          <div className="WallLable" key={wall._id}>
+            <div className="ImgPreview">
+              <img className="ImgPrev" alt={wall.name} src={wall.path}/>
+            </div>
+            {wall.name}
+          </div>
+        )
+      });
+      return results;
+    }
   }
 
   render () {
-    console.log(this.props.allWalls[2]);
     return (
-      <div>{this.renderWallLable}</div>
+      <div>
+        {this.renderWallLable()}
+      </div>
     )
   }
 

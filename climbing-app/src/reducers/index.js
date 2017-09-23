@@ -1,10 +1,8 @@
 const initialState = {
-  walls: {
     walls: []
-  }
 }
 
-const wallReducer = (state = initialState.walls, action) => {
+const wallReducer = (state = initialState, action) => {
   switch(action.type) {
     case "ADD_ALL_WALLS":
     return {
