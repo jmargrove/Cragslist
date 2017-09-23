@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { listWalls } from '../actions';
 
+import NavigationComponent from '../components/NavigationComponent';
 import WallListComponent from '../components/WallListComponent';
 
 class DashboardComponent extends React.Component {
@@ -33,6 +34,7 @@ class DashboardComponent extends React.Component {
     return (
       <div className="Dashboard">
         <WallListComponent allWalls={this.state.walls} />
+        <NavigationComponent />
       </div>
     )
   }

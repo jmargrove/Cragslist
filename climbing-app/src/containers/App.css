@@ -17,5 +17,13 @@
 
 .Dashboard {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*overflow: scroll;
+  min-height: 100%;*/
+}
+
+.Navigation {
+  display: flex;
   justify-content: center;
 }
