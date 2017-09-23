@@ -2,28 +2,32 @@
   display: flex;
   width:40%;
   flex-grow:2;
-  flex-basis: auto;
+  /*flex-basis: auto;*/
   padding: 3px;
 }
 
 .WallList {
   display: flex;
-  flex-direction: row;
-  flex-shrink: 1;
+  /*flex-direction: row;*/
+  /*flex-shrink: 1;*/
   flex-wrap: wrap;
-  align-content: center;
-  width: 80%;
+  justify-content: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  /*width: 80%;*/
+  overflow-y: scroll;
+  height: 100%;
+  max-height: 80vh;
 }
 
 .Dashboard {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /*overflow: scroll;
-  min-height: 100%;*/
 }
 
 .Navigation {
   display: flex;
   justify-content: center;
+
 }
