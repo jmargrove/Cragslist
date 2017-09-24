@@ -7,6 +7,10 @@ import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import { connect } from 'react-redux';
 import { tabSwitch } from '../actions';
 
+import {
+  Link
+} from 'react-router-dom';
+
 const addIcon = <FontIcon className="material-icons">add</FontIcon>;
 const userIcon = <FontIcon className="material-icons">perm_identity</FontIcon>;
 const ratingIcon = <FontIcon className="material-icons">language</FontIcon>;
@@ -25,18 +29,24 @@ class Navigation1Component extends React.Component {
       <div className="Navigation">
         <Paper zDepth={1}>
           <BottomNavigation selectedIndex={this.state.selectedIndex}>
-          <BottomNavigationItem
-            icon={addIcon}
-            onClick={() => this.select(0)}
-          />
-          <BottomNavigationItem
-            icon={ratingIcon}
-            onClick={() => this.select(1)}
-          />
-          <BottomNavigationItem
-            icon={userIcon}
-            onClick={() => this.select(2)}
-          />
+          <Link to={`/routes`}>
+            <BottomNavigationItem
+              icon={addIcon}
+              onClick={() => this.select(0)}
+            />
+          </Link>
+          <Link to={`/`}>
+            <BottomNavigationItem
+              icon={ratingIcon}
+              onClick={() => this.select(1)}
+            />
+          </Link>
+          <Link to={`/sign-in`}>
+            <BottomNavigationItem
+              icon={userIcon}
+              onClick={() => this.select(2)}
+            />
+          </Link>
           </BottomNavigation>
         </Paper>
       </div>

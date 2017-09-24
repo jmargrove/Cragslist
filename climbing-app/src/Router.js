@@ -12,6 +12,11 @@ import DashboardContainer from './containers/DashboardContainer';
 import SignInComponent from './containers/SignInComponent';
 import NavigationComponent from './components/NavigationComponent';
 import AppBarComponent from './components/AppBarComponent';
+import WallEditorContainer from './containers/WallEditorContainer';
+// {console.log("hey route");}
+// const state = store.getState();
+
+
 const Routes = () => (
   <Router>
     <div>
@@ -22,6 +27,7 @@ const Routes = () => (
         <Route path="/sign-in" component={SignInComponent}/>
         <Route path="/me" component={User}/>
         <Route path="/rating" component={Rating}/>
+        <Route path="/routes" component={WallEditorContainer}/>
       </Switch>
       <NavigationComponent />
     </div>
