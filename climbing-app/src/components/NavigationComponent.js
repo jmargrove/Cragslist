@@ -4,16 +4,22 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
+import { connect } from 'react-redux';
+import { tabSwitch } from '../actions';
+
 const addIcon = <FontIcon className="material-icons">add</FontIcon>;
 const userIcon = <FontIcon className="material-icons">perm_identity</FontIcon>;
 const ratingIcon = <FontIcon className="material-icons">language</FontIcon>;
 
-class NavigationComponent extends React.Component {
+class Navigation1Component extends React.Component {
   state = {
       selectedIndex: 0,
     };
 
-    select = (index) => this.setState({selectedIndex: index});
+    select = (index) => {
+      this.setState({selectedIndex: index});
+      this.props.tabSwitch(index);
+    }
   render () {
     return (
       <div className="Navigation">
@@ -37,5 +43,15 @@ class NavigationComponent extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  tabNum: state.tabNum
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  tabSwitch: (tabNum) => dispatch(tabSwitch(tabNum))
+})
+
+const NavigationComponent = connect(mapStateToProps, mapDispatchToProps)(Navigation1Component);
 
 export default NavigationComponent;

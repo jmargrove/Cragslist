@@ -9,16 +9,22 @@ import {
 
 
 import DashboardContainer from './containers/DashboardContainer';
-
+import SignInComponent from './containers/SignInComponent';
+import NavigationComponent from './components/NavigationComponent';
+import AppBarComponent from './components/AppBarComponent';
 const Routes = () => (
   <Router>
-    <Switch>
-      <Route path="/routes/:name" component={WallChild}/>
-      <Route exact path="/" component={DashboardContainer}/>
-      <Route path="/sign-in" component={SignIn}/>
-      <Route path="/me" component={User}/>
-      <Route path="/rating" component={Rating}/>
-    </Switch>
+    <div>
+      <AppBarComponent />
+      <Switch>
+        <Route path="/routes/:name" component={WallChild}/>
+        <Route exact path="/" component={DashboardContainer}/>
+        <Route path="/sign-in" component={SignInComponent}/>
+        <Route path="/me" component={User}/>
+        <Route path="/rating" component={Rating}/>
+      </Switch>
+      <NavigationComponent />
+    </div>
   </Router>
 )
 
@@ -28,11 +34,6 @@ const Rating = () => (
   </div>
 )
 
-const SignIn = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
 
 const User = () => (
   <div>

@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 
 import { listWalls } from '../actions';
 
-import NavigationComponent from '../components/NavigationComponent';
 import WallListComponent from '../components/WallListComponent';
+import NavigationComponent from '../components/NavigationComponent';
+
+console.log("hey");
+
 
 class DashboardComponent extends React.Component {
 
@@ -26,26 +29,30 @@ class DashboardComponent extends React.Component {
     })
     .then(fetchedWalls => {
       this.setState({walls: fetchedWalls});
+      this.props.listWalls(fetchedWalls);
       console.log("local state", this.state);
     })
   }
 
   render () {
     return (
-      <div className="Dashboard">
-        <WallListComponent allWalls={this.state.walls} />
-        <NavigationComponent />
+      <div>
+        <div className="Dashboard">
+          <WallListComponent allWalls={this.state.walls} />
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  walls: state.walls
+  walls: state.walls,
+  // tabNum: state.tabNum
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  listWalls: (walls) => dispatch(listWalls(walls))
+  listWalls: (walls) => dispatch(listWalls(walls)),
+  // tabSwitch: (tabNum) => dispatch(tabSwitch(tabNum))
 })
 
 const DashboardContainer = connect(mapStateToProps, mapDispatchToProps)(DashboardComponent);

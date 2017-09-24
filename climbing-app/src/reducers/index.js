@@ -1,5 +1,6 @@
 const initialState = {
-    walls: []
+    walls: [],
+    tabNum: ''
 }
 
 const wallReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const wallReducer = (state = initialState, action) => {
       walls: action.walls
     }
     break;
+    case "SWITCH_THE_TAB":
+      return {
+        ...state,
+        tabNum: action.tabNum
+      }
     default:
       return state;
   }
