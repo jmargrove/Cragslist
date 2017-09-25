@@ -81,6 +81,13 @@ class WallEditorComponent extends React.Component {
     console.log(value);
   }
 
+  handleCategoryChange = (e, index, value) => {
+    this.setState({
+      "difficulty": value
+    })
+    console.log(value);
+  }
+
   handleSubmit = (e) => {
     this.createAlbum('walls');
     console.log("state when we SET THE ROUTE", this.state);
@@ -94,6 +101,7 @@ class WallEditorComponent extends React.Component {
   }
 
   handlePath = (event) => {
+    let location;
     var files = event.target.files;
     if (!files.length) {
       return alert('Please choose a file to upload first.');
@@ -115,12 +123,13 @@ class WallEditorComponent extends React.Component {
         console.log(err);
         return console.error('There was an error uploading your photo: ', err.message);
       }
-      console.log('Successfully uploaded photo.', data.Location);
-      // this.setState({
-      //   path: data.Location
-      // })
-      // this.handlePath(albumName);
+      console.log('Successfully uploaded photo.', data.Location, this.state);
+      location = data.Location;
     });
+    console.log("tets",this);
+    // this.setState({
+    //   "path": location
+    // })
   }
   render () {
     const styles = {
@@ -173,6 +182,16 @@ class WallEditorComponent extends React.Component {
           <MenuItem value={"Sharma Climbing BCN"} primaryText="Sharma Climbing BCN" />
           <MenuItem value={"Deu Dits"} primaryText="Deu Dits" />
           <MenuItem value={"Climbat La Foixarda"} primaryText="Climbat La Foixarda" />
+        </SelectField> <br />
+        <SelectField
+          floatingLabelText="Choose Category"
+          value={this.state.category}
+          onChange={this.handleCategoryChange}
+          name="category"
+        >
+          <MenuItem value={"6a"} primaryText="6a" />
+          <MenuItem value={"7a"} primaryText="7a" />
+          <MenuItem value={"8a"} primaryText="8a" />
         </SelectField> <br />
         <RaisedButton label="Set the route!" fullWidth={true} primary={true} onClick={this.handleSubmit} />
       </div>

@@ -41,7 +41,7 @@ class NavigationComponent extends React.Component {
               onClick={() => this.select(1)}
             />
           </Link>
-          <Link to={`/sign-in`}>
+          <Link to={`/user`}>
             <BottomNavigationItem
               icon={userIcon}
               onClick={() => this.select(2)}

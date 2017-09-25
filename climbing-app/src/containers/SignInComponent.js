@@ -12,10 +12,12 @@ class SignInComponent extends React.Component {
     return (
       <div>
         <h1>We have SignInComponent</h1>
-        <Link to={`/me`}>
+        <Link to={`/sign-in`}>
           <RaisedButton label="My profile" primary={true}  />
         </Link> <br />
-        <RaisedButton label="Create profile" primary={true}  />
+        <Link to={`/create-user`}>
+          <RaisedButton label="Create profile" primary={true}  />
+        </Link>
       </div>
     )
   }
