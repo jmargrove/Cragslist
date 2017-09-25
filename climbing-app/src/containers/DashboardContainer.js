@@ -22,7 +22,7 @@ class DashboardComponent extends React.Component {
   }
 
   fetchWalls () {
-    fetch('http://localhost:3000/routes')
+    fetch('http://Karina-MacBookPro.local:3000/routes')
     .then(walls => walls.json())
     .then(walls => {
       return walls;

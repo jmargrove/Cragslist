@@ -5,7 +5,7 @@ const initialState = {
 
 const wallReducer = (state = initialState, action) => {
   switch(action.type) {
-    case "ADD_ALL_WALLS":
+    case "LIST_ALL_WALLS":
     return {
       ...state,
       walls: action.walls
@@ -16,6 +16,8 @@ const wallReducer = (state = initialState, action) => {
         ...state,
         tabNum: action.tabNum
       }
+    break;
+
     default:
       return state;
   }

@@ -13,6 +13,7 @@ import SignInComponent from './containers/SignInComponent';
 import NavigationComponent from './components/NavigationComponent';
 import AppBarComponent from './components/AppBarComponent';
 import WallEditorContainer from './containers/WallEditorContainer';
+import SingleRouteComponent from './components/SingleRouteComponent';
 // {console.log("hey route");}
 // const state = store.getState();
 
@@ -22,7 +23,7 @@ const Routes = () => (
     <div>
       <AppBarComponent />
       <Switch>
-        <Route path="/routes/:name" component={WallChild}/>
+        <Route path="/routes/:name" component={SingleRouteComponent}/>
         <Route exact path="/" component={DashboardContainer}/>
         <Route path="/sign-in" component={SignInComponent}/>
         <Route path="/me" component={User}/>
@@ -46,11 +47,11 @@ const User = () => (
     <h2>User page</h2>
   </div>
 )
-
-const WallChild = ({match}) => (
-  <div>
-    <h2>{match.params.name}</h2>
-  </div>
-)
+//
+// const WallChild = ({match}) => (
+//   <div>
+//     <h2>{match.params.name}</h2>
+//   </div>
+// )
 
 export default Routes;

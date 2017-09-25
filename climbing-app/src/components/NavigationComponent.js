@@ -15,7 +15,7 @@ const addIcon = <FontIcon className="material-icons">add</FontIcon>;
 const userIcon = <FontIcon className="material-icons">perm_identity</FontIcon>;
 const ratingIcon = <FontIcon className="material-icons">language</FontIcon>;
 
-class Navigation1Component extends React.Component {
+class NavigationComponent extends React.Component {
   state = {
       selectedIndex: 0,
     };
@@ -62,6 +62,4 @@ const mapDispatchToProps = (dispatch) => ({
   tabSwitch: (tabNum) => dispatch(tabSwitch(tabNum))
 })
 
-const NavigationComponent = connect(mapStateToProps, mapDispatchToProps)(Navigation1Component);
-
-export default NavigationComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationComponent);

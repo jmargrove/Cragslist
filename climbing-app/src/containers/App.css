@@ -31,9 +31,13 @@
 }
 
 .Navigation {
-  display: flex;
-  justify-content: center;
-  display: block;
-  overflow: hidden;
+  /*display: flex;
+  justify-content: center;*/
+  /*display: block;*/
+  /*overflow:auto;*/
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
 
 }
