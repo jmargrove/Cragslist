@@ -65,7 +65,7 @@ class CreateUserComponent extends React.Component {
     username: '',
     password: '',
     category: '',
-    avatar: ''
+    avatar: 'wsefds'
   }
 
   handleChanges = (e) => {
@@ -76,7 +76,7 @@ class CreateUserComponent extends React.Component {
   handleSubmit = (e) => {
     // this.createAlbum('users');
     console.log("state when we SET THE ROUTE", this.state);
-    this.createWall({
+    this.createUser({
       username: this.state.username,
       password: this.state.password,
       category: this.state.category,
@@ -152,6 +152,7 @@ class CreateUserComponent extends React.Component {
           <MenuItem value={"7a"} primaryText="7a" />
           <MenuItem value={"8a"} primaryText="8a" />
         </SelectField>
+        <RaisedButton label="Create User!" fullWidth={true} primary={true} onClick={this.handleSubmit} />
       </div>
     )
   }
