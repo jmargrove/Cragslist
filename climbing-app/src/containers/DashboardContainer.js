@@ -6,8 +6,6 @@ import { listWalls } from '../actions';
 import WallListComponent from '../components/WallListComponent';
 import NavigationComponent from '../components/NavigationComponent';
 
-console.log("hey");
-
 
 class DashboardComponent extends React.Component {
 

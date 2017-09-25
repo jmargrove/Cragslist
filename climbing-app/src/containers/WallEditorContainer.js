@@ -6,10 +6,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import moment from 'moment';
 
-var AWS = require('aws-sdk');
-var albumBucketName = 'my-climbing-app-1';
-var bucketRegion = 'us-east-1';
-var IdentityPoolId = 'us-east-1:0975d0ea-7e62-434f-8b2e-3907bc51ec6f';
+import AWS from 'aws-sdk';
+var albumBucketName = 'climbing-kd';
+var bucketRegion = 'eu-west-1';
+var IdentityPoolId = 'eu-west-1:ffdcc2f5-641f-4ee8-8270-b4a8f508f60a';
 
 
 AWS.config.update({
@@ -23,8 +23,6 @@ var s3 = new AWS.S3({
   apiVersion: '2006-03-01',
   params: {Bucket: albumBucketName}
 });
-
-
 
 class WallEditorComponent extends React.Component {
 
@@ -76,16 +74,15 @@ class WallEditorComponent extends React.Component {
     })
   }
 
-  handleChange = (e, index, value) => {
+  handleGymChange = (e, index, value) => {
     this.setState({
-    [e.target.name]: e.target
+      "gym": value
     })
-    console.log(e.target);
+    console.log(value);
   }
 
   handleSubmit = (e) => {
     this.createAlbum('walls');
-    this.handlePath()
     console.log("state when we SET THE ROUTE", this.state);
     this.createWall({
       name: this.state.name,
@@ -96,26 +93,33 @@ class WallEditorComponent extends React.Component {
     })
   }
 
-  handlePath = (albumName) => {
-    var files = document.getElementById('files').files;
+  handlePath = (event) => {
+    var files = event.target.files;
     if (!files.length) {
       return alert('Please choose a file to upload first.');
     }
     var file = files[0];
     var fileName = file.name;
-    var albumPhotosKey = encodeURIComponent(albumName) + '//';
-
+    var albumPhotosKey = 'walls/';
     var photoKey = albumPhotosKey + fileName;
+    console.log({
+      photoKey,
+      file,
+    });
     s3.upload({
       Key: photoKey,
       Body: file,
       ACL: 'public-read'
     }, function(err, data) {
       if (err) {
-        return alert('There was an error uploading your photo: ', err.message);
+        console.log(err);
+        return console.error('There was an error uploading your photo: ', err.message);
       }
-      alert('Successfully uploaded photo.');
-      this.handlePath(albumName);
+      console.log('Successfully uploaded photo.', data.Location);
+      // this.setState({
+      //   path: data.Location
+      // })
+      // this.handlePath(albumName);
     });
   }
   render () {
@@ -149,19 +153,26 @@ class WallEditorComponent extends React.Component {
            labelPosition="before"
            style={styles.button}
            containerElement="label"
-           onChange={this.handlePath}
-         >
-           <input id="files" type="file" style={styles.exampleImageInput} />
-        </RaisedButton><br />
+          //  onChange={this.handlePath}
+        >
+          <input
+            id="files"
+            type="file"
+            ref="image"
+            style={styles.exampleImageInput}
+            onChange={this.handlePath}
+          />
+        </RaisedButton>
+        <br />
         <SelectField
           floatingLabelText="Choose gym name"
-          value={this.state.difficulty}
-          onChange={this.handleChange}
+          value={this.state.gym}
+          onChange={this.handleGymChange}
           name="gym"
         >
-          <MenuItem value={1} primaryText="Sharma Climbing BCN" />
-          <MenuItem value={2} primaryText="Deu Dits" />
-          <MenuItem value={3} primaryText="Climbat La Foixarda" />
+          <MenuItem value={"Sharma Climbing BCN"} primaryText="Sharma Climbing BCN" />
+          <MenuItem value={"Deu Dits"} primaryText="Deu Dits" />
+          <MenuItem value={"Climbat La Foixarda"} primaryText="Climbat La Foixarda" />
         </SelectField> <br />
         <RaisedButton label="Set the route!" fullWidth={true} primary={true} onClick={this.handleSubmit} />
       </div>
