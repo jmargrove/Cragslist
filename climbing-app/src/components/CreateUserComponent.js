@@ -69,7 +69,8 @@ class CreateUserComponent extends React.Component {
     username: '',
     password: '',
     category: '',
-    avatar: ''
+    avatar: '',
+    points: 0
   }
 
   handleChanges = (e) => {
@@ -87,13 +88,15 @@ class CreateUserComponent extends React.Component {
       username: this.state.username,
       password: this.state.password,
       category: this.state.category,
-      avatar: this.state.avatar
+      avatar: this.state.avatar,
+      points: this.state.points
     })
     this.setState({
       username: '',
       password: '',
       category: '',
-      avatar: ''
+      avatar: '',
+      points: ''
     })
   }
 

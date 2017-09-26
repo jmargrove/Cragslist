@@ -18,7 +18,7 @@ class RankingListComponent extends React.Component {
             {/* <Link to={`/routes/${user.name}`}> */}
           <Card>
             <CardMedia
-              overlay={<CardTitle title={user.username} subtitle={user.category} />}
+              overlay={<CardTitle title={`${user.username} - ${user.points} points`} subtitle={user.category} />}
             >
               <img src={user.avatar} alt={user.name} />
             </CardMedia>

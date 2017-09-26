@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 
 import { listWalls } from '../actions';
 
+import RaisedButton from 'material-ui/RaisedButton';
+import {
+  Link
+} from 'react-router-dom';
+
 
 class SingleRouteComponent extends React.Component {
 
@@ -38,6 +43,14 @@ class SingleRouteComponent extends React.Component {
     })
   }
 
+  handleSubmit = (e) => {
+
+    console.log(this.state.walls.name);
+    this.submitCompletion({
+      name: this.state.walls.name
+    })
+    //give points to user
+  }
 
   render () {
     console.log(this.props.wall);
@@ -51,6 +64,9 @@ class SingleRouteComponent extends React.Component {
           <h2>
             {this.state.walls.difficulty}
           </h2>
+        </div>
+        <div className="ButtonCompletion">
+          <RaisedButton label="I have completed this route" fullWidth={true} primary={true} onClick={this.handleSubmit} />
         </div>
       </div>
     )

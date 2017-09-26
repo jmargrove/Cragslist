@@ -14,7 +14,7 @@ import NavigationComponent from './components/NavigationComponent';
 import AppBarComponent from './components/AppBarComponent';
 import WallEditorContainer from './containers/WallEditorContainer';
 import SingleRouteComponent from './components/SingleRouteComponent';
-import LogInComponent from './components/LogInComponent';
+// import LogInComponent from './components/LogInComponent';
 import CreateUserComponent from './components/CreateUserComponent';
 import RankingContainer from './containers/RankingContainer';
 import ProfileComponent from './components/ProfileComponent';
@@ -34,7 +34,7 @@ const Routes = () => (
         <Route path="/me" component={User}/>
         <Route path="/ranking" component={RankingContainer}/>
         <Route path="/routes" component={WallEditorContainer}/>
-        <Route path="/sign-in" component={LogInComponent}/>
+        <Route path="/sign-in" component={UserLoginContainer}/>
         <Route path="/create-user" component={CreateUserComponent}/>
         <Route path="/:username" component={ProfileComponent}/>
       </Switch>

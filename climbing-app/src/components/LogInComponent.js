@@ -13,6 +13,15 @@ class LogInComponent extends React.Component {
     password: ''
   }
 
+  fetchUserSession () {
+    fetch('http://Karina-MacBookPro.local:3000/sign-in')
+    .then(user => user.json())
+    .then(user => {
+      console.log(user);
+      return user;
+    })
+  }
+
   handleChanges = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -21,10 +30,11 @@ class LogInComponent extends React.Component {
   handleSubmit = (e) => {
     // this.createAlbum('users');
     console.log("we log in", this.state);
-    this.createUser({
-      username: this.state.username,
-      password: this.state.password
-    })
+    this.fetchUserSession()
+    // this.createUser({
+    //   username: this.state.username,
+    //   password: this.state.password
+    // })
   }
   render () {
     return (
