@@ -17,6 +17,8 @@ import SingleRouteComponent from './components/SingleRouteComponent';
 import LogInComponent from './components/LogInComponent';
 import CreateUserComponent from './components/CreateUserComponent';
 import RankingContainer from './containers/RankingContainer';
+import ProfileComponent from './components/ProfileComponent';
+import UserLoginContainer from './containers/UserLoginContainer';
 // {console.log("hey route");}
 // const state = store.getState();
 
@@ -28,12 +30,13 @@ const Routes = () => (
       <Switch>
         <Route path="/routes/:name" component={SingleRouteComponent}/>
         <Route exact path="/" component={DashboardContainer}/>
-        <Route path="/user" component={SignInComponent}/>
+        <Route path="/user" component={UserLoginContainer}/>
         <Route path="/me" component={User}/>
         <Route path="/ranking" component={RankingContainer}/>
         <Route path="/routes" component={WallEditorContainer}/>
         <Route path="/sign-in" component={LogInComponent}/>
         <Route path="/create-user" component={CreateUserComponent}/>
+        <Route path="/:username" component={ProfileComponent}/>
       </Switch>
       <NavigationComponent />
     </div>

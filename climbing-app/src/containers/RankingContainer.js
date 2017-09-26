@@ -37,11 +37,22 @@ class RankingComponent extends React.Component {
   }
 
   render () {
-    return (
-      <div className="Ranking">
-        <RankingListComponent allUsers={this.state.users} />
-      </div>
-    )
+    if (this.state.users.length < 1) {
+      return(
+        <div>
+          <h1>Climbers are not here yet</h1>
+            <img src='https://s-media-cache-ak0.pinimg.com/originals/28/a9/ab/28a9abd1cf9a544539cd546957d037fd.jpg'
+            alt=''
+          />
+        </div>
+      )
+    } else {
+      return (
+        <div className="Ranking">
+          <RankingListComponent allUsers={this.state.users} />
+        </div>
+      )
+    }
   }
 }
 

@@ -33,13 +33,26 @@ class DashboardComponent extends React.Component {
   }
 
   render () {
-    return (
-      <div>
-        <div className="Dashboard">
-          <WallListComponent allWalls={this.state.walls} />
+    if (this.state.walls.length < 1) {
+      return (
+        <div>
+          <img src='https://cdn.ukc2.com/i/259558.jpg'
+          alt=''
+        />
+          <h1>
+            Route setting in process
+          </h1>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+          <div className="Dashboard">
+            <WallListComponent allWalls={this.state.walls} />
+          </div>
+        </div>
+      )
+    }
   }
 }
 

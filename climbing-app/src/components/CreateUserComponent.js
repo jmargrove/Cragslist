@@ -5,12 +5,16 @@ import SelectField from 'material-ui/SelectField';
 
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import {
+  Link
+} from 'react-router-dom';
 
 import uuid from 'uuid/v4';
 import AWS from 'aws-sdk';
 var albumBucketName = 'climbing-kd';
 var bucketRegion = 'eu-west-1';
 var IdentityPoolId = 'eu-west-1:ffdcc2f5-641f-4ee8-8270-b4a8f508f60a';
+
 
 AWS.config.update({
   region: bucketRegion,
@@ -149,6 +153,11 @@ class CreateUserComponent extends React.Component {
     };
     return (
       <div>
+        <div className="ButtonCancel">
+          <Link to='/'>
+            <RaisedButton label="Cancel" primary={true} />
+          </Link>
+        </div>
         <TextField
           hintText="Username"
           floatingLabelText="Choose username"
@@ -192,7 +201,9 @@ class CreateUserComponent extends React.Component {
           <MenuItem value={"7a"} primaryText="7a" />
           <MenuItem value={"8a"} primaryText="8a" />
         </SelectField>
-        <RaisedButton label="Create User!" fullWidth={true} primary={true} onClick={this.handleSubmit} />
+        <Link to='/user'>
+          <RaisedButton label="Create User!" fullWidth={true} primary={true} onClick={this.handleSubmit} />
+        </Link>
       </div>
     )
   }
