@@ -2,6 +2,8 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
+import { connect } from 'react-redux';
+
 import {
   Link
 } from 'react-router-dom';
@@ -15,11 +17,16 @@ class UserLoginComponent extends React.Component {
   }
 
   fetchUserSession () {
-    fetch('http://Karina-MacBookPro.local:3000/sign-in')
+    const encoded = btoa(`${this.state.username}:${this.state.password}`)
+    console.log(encoded);
+    fetch('http://Karina-MacBookPro.local:3000/sign-in', {
+      headers: {
+        'Authorization': `Basic ${encoded}`
+      }
+    })
     .then(user => user.json())
     .then(user => {
-      console.log(user);
-      return user;
+      this.props.addAuthorization(user);
     })
   }
 
@@ -56,6 +63,7 @@ class UserLoginComponent extends React.Component {
           floatingLabelText="Enter password"
           id="inputName"
           name="password"
+          type="password"
           value={this.state.password}
           onChange={this.handleChanges}
         />
@@ -73,4 +81,15 @@ class UserLoginComponent extends React.Component {
   }
 }
 
-export default UserLoginComponent;
+const mapStateToProps = (state) => ({
+  
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addAuthorization: (data) =>  dispatch({
+    type: 'SET_AUTHORIZATION',
+    data
+  })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserLoginComponent);

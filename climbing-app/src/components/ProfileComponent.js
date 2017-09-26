@@ -60,7 +60,7 @@ class ProfileComponent extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.users
+  user: state.data.users
   .find(user => {
     console.log(user.username, ownProps.match.params.name);
     return ownProps.match.params.name;

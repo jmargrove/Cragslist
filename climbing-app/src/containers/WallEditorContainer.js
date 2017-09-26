@@ -7,6 +7,8 @@ import uuid from 'uuid/v4';
 
 import moment from 'moment';
 
+import { connect } from 'react-redux';
+
 import AWS from 'aws-sdk';
 var albumBucketName = 'climbing-kd';
 var bucketRegion = 'eu-west-1';
@@ -56,7 +58,8 @@ class WallEditorComponent extends React.Component {
     fetch('http://Karina-MacBookPro.local:3000/routes', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth.token}`
       },
       body: JSON.stringify(data)
     })
@@ -202,4 +205,12 @@ class WallEditorComponent extends React.Component {
   }
 }
 
-export default WallEditorComponent;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WallEditorComponent);

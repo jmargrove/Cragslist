@@ -33,18 +33,18 @@ class DashboardComponent extends React.Component {
   }
 
   render () {
-    if (this.state.walls.length < 1) {
-      return (
-        <div>
-          <img src='https://cdn.ukc2.com/i/259558.jpg'
-          alt=''
-        />
-          <h1>
-            Route setting in process
-          </h1>
-        </div>
-      )
-    } else {
+    // if (this.state.walls.length < 1) {
+    //   return (
+    //     <div>
+    //       <img src='https://cdn.ukc2.com/i/259558.jpg'
+    //       alt=''
+    //     />
+    //       <h1>
+    //         Route setting in process
+    //       </h1>
+    //     </div>
+    //   )
+    // } else {
       return (
         <div>
           <div className="Dashboard">
@@ -52,12 +52,12 @@ class DashboardComponent extends React.Component {
           </div>
         </div>
       )
-    }
+    // }
   }
 }
 
 const mapStateToProps = (state) => ({
-  walls: state.walls,
+  walls: state.data.walls,
   // tabNum: state.tabNum
 })
 

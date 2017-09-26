@@ -21,7 +21,8 @@ class SingleRouteComponent extends React.Component {
     fetch('http://Karina-MacBookPro.local:3000/completion', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth.token}`
       },
       body: JSON.stringify(data)
     })
@@ -73,11 +74,12 @@ class SingleRouteComponent extends React.Component {
   }
 }
 const mapStateToProps = (state, ownProps) => ({
-  wall: state.walls
+  wall: state.data.walls
   .find(wall => {
     console.log(wall.name, ownProps.match.params.name);
     return ownProps.match.params.name;
   }),
+  auth: state.auth
   // tabNum: state.tabNum
 })
 
