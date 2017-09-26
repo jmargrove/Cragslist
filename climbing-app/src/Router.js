@@ -3,9 +3,10 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch
+  Switch,
+  Redirect,
 } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 
 
 import DashboardContainer from './containers/DashboardContainer';
@@ -22,26 +23,43 @@ import UserLoginContainer from './containers/UserLoginContainer';
 // {console.log("hey route");}
 // const state = store.getState();
 
-
-const Routes = () => (
-  <Router>
-    <div>
-      <AppBarComponent />
-      <Switch>
-        <Route path="/routes/:name" component={SingleRouteComponent}/>
-        <Route exact path="/" component={DashboardContainer}/>
-        <Route path="/user" component={UserLoginContainer}/>
-        <Route path="/me" component={User}/>
-        <Route path="/ranking" component={RankingContainer}/>
-        <Route path="/routes" component={WallEditorContainer}/>
-        <Route path="/sign-in" component={UserLoginContainer}/>
-        <Route path="/create-user" component={CreateUserComponent}/>
-        <Route path="/:username" component={ProfileComponent}/>
-      </Switch>
-      <NavigationComponent />
-    </div>
-  </Router>
+const PrivateRoute = ({ component: Component, auth, ...rest }) => (
+  <Route {...rest} render={props => (
+    auth.token !== null ? (
+      <Component {...props} {...rest}/>
+    ) : (
+      <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
 )
+
+class Routes extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <AppBarComponent />
+          <Switch>
+            <Route path="/routes/:name" component={SingleRouteComponent}/>
+            <Route exact path="/" component={DashboardContainer}/>
+            <PrivateRoute auth={this.props.auth} path="/user" component={ProfileComponent}/>
+            <Route path="/login" component={UserLoginContainer}/>
+            <PrivateRoute auth={this.props.auth} path="/me" component={User}/>
+            <Route path="/ranking" component={RankingContainer}/>
+            <Route path="/routes" component={WallEditorContainer}/>
+            <Route path="/sign-in" component={UserLoginContainer}/>
+            <Route path="/create-user" component={CreateUserComponent}/>
+            <Route path="/:username" component={ProfileComponent}/>
+          </Switch>
+          <NavigationComponent />
+        </div>
+      </Router>
+    )
+  }
+}
 
 const Rating = () => (
   <div>
@@ -62,4 +80,8 @@ const User = () => (
 //   </div>
 // )
 
-export default Routes;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(Routes);

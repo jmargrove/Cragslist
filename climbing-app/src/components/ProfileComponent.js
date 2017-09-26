@@ -12,8 +12,20 @@ import {
 class ProfileComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.fetchUsers();
+    if(this.props.auth && this.props.auth.token) {
+      this.fetchUser();
+    }
     this.state = {users: ''};
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('componentDidUpdate', this.props.auth.token);
+    if(
+      this.props.auth.token !== null
+      && this.props.auth.token !== prevProps.auth.token
+    ) {
+       this.fetchUser();
+     }
   }
 
   submitCompletion = (data) => {
@@ -26,20 +38,18 @@ class ProfileComponent extends React.Component {
     })
   }
 
-  fetchUsers () {
-    fetch('http://Karina-MacBookPro.local:3000/ranking')
-    .then(users => users.json())
-    .then(users => {
-      console.log(users);
-      return users;
+  fetchUser () {
+    const path = this.props.myProfile ? 'me' : `users/${this.props.user.username}`;
+    fetch(`http://Karina-MacBookPro.local:3000/${path}`, {
+      headers: {
+        'Authorization': `Bearer ${this.props.auth.token}`
+      }
     })
-    .then(fetchedUsers => {
-      this.props.listUsers(fetchedUsers);
-      let user = fetchedUsers.find(user => {
-        return user.name === this.props.match.params.name;
-      })
+    .then(user => user.json())
+    .then(user => {
+      console.log(user);
       this.setState({users: user});
-    })
+    });
   }
   render () {
     return (
@@ -59,14 +69,24 @@ class ProfileComponent extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  user: state.data.users
-  .find(user => {
-    console.log(user.username, ownProps.match.params.name);
-    return ownProps.match.params.name;
-  }),
-  // tabNum: state.tabNum
-})
+const mapStateToProps = (state, ownProps) => {
+
+  console.log(ownProps);
+  const username = ownProps.match && ownProps.match.params.name
+    ? ownProps.match.params.name
+    : state.auth.user !== null
+      ? state.auth.user.username
+      : null;
+
+  return {
+    myProfile: ownProps.match.params.name === undefined,
+    user: state.data.users
+    .find(user => {
+      return username === user.username;
+    }),
+    auth: state.auth,
+  };
+}
 
 const mapDispatchToProps = (dispatch) => ({
   listUsers: (users) => dispatch(listUsers(users)),
