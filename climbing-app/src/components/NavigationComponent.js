@@ -13,7 +13,8 @@ import {
 
 const addIcon = <FontIcon className="material-icons">add</FontIcon>;
 const userIcon = <FontIcon className="material-icons">perm_identity</FontIcon>;
-const ratingIcon = <FontIcon className="material-icons">language</FontIcon>;
+const terrainIcon = <FontIcon className="material-icons">language</FontIcon>;
+const homeIcon = <FontIcon className="material-icons">terrain</FontIcon>;
 
 class NavigationComponent extends React.Component {
   state = {
@@ -37,13 +38,19 @@ class NavigationComponent extends React.Component {
           </Link>
           <Link to={`/`}>
             <BottomNavigationItem
-              icon={ratingIcon}
+              icon={homeIcon}
               onClick={() => this.select(1)}
             />
           </Link>
           <Link to={`/user`}>
             <BottomNavigationItem
               icon={userIcon}
+              onClick={() => this.select(2)}
+            />
+          </Link>
+          <Link to={`/ranking`}>
+            <BottomNavigationItem
+              icon={terrainIcon}
               onClick={() => this.select(2)}
             />
           </Link>

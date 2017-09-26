@@ -11,7 +11,6 @@ class SignInComponent extends React.Component {
   render () {
     return (
       <div>
-        <h1>We have SignInComponent</h1>
         <Link to={`/sign-in`}>
           <RaisedButton label="My profile" primary={true}  />
         </Link> <br />

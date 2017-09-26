@@ -6,23 +6,23 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
-// import AWS from 'aws-sdk';
-// var albumBucketName = 'climbing-kd';
-// var bucketRegion = 'eu-west-1';
-// var IdentityPoolId = 'eu-west-1:ffdcc2f5-641f-4ee8-8270-b4a8f508f60a';
-//
-//
-// AWS.config.update({
-//   region: bucketRegion,
-//   credentials: new AWS.CognitoIdentityCredentials({
-//     IdentityPoolId: IdentityPoolId
-//   })
-// });
-//
-// var s3 = new AWS.S3({
-//   apiVersion: '2006-03-01',
-//   params: {Bucket: albumBucketName}
-// });
+import uuid from 'uuid/v4';
+import AWS from 'aws-sdk';
+var albumBucketName = 'climbing-kd';
+var bucketRegion = 'eu-west-1';
+var IdentityPoolId = 'eu-west-1:ffdcc2f5-641f-4ee8-8270-b4a8f508f60a';
+
+AWS.config.update({
+  region: bucketRegion,
+  credentials: new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: IdentityPoolId
+  })
+});
+
+var s3 = new AWS.S3({
+  apiVersion: '2006-03-01',
+  params: {Bucket: albumBucketName}
+});
 
 class CreateUserComponent extends React.Component {
 
@@ -65,7 +65,7 @@ class CreateUserComponent extends React.Component {
     username: '',
     password: '',
     category: '',
-    avatar: 'wsefds'
+    avatar: ''
   }
 
   handleChanges = (e) => {
@@ -75,7 +75,7 @@ class CreateUserComponent extends React.Component {
   }
   handleSubmit = (e) => {
     // this.createAlbum('users');
-    console.log("state when we SET THE ROUTE", this.state);
+    console.log("we created user", this.state);
     this.createUser({
       username: this.state.username,
       password: this.state.password,
@@ -91,39 +91,53 @@ class CreateUserComponent extends React.Component {
     console.log(value);
   }
 
-  // handlePath = (event) => {
-  //   let location;
-  //   var files = event.target.files;
-  //   if (!files.length) {
-  //     return alert('Please choose a file to upload first.');
-  //   }
-  //   var file = files[0];
-  //   var fileName = file.name;
-  //   var albumPhotosKey = 'walls/';
-  //   var photoKey = albumPhotosKey + fileName;
-  //   console.log({
-  //     photoKey,
-  //     file,
-  //   });
-  //   s3.upload({
-  //     Key: photoKey,
-  //     Body: file,
-  //     ACL: 'public-read'
-  //   }, function(err, data) {
-  //     if (err) {
-  //       console.log(err);
-  //       return console.error('There was an error uploading your photo: ', err.message);
-  //     }
-  //     console.log('Successfully uploaded photo.', data.Location, this.state);
-  //     location = data.Location;
-  //   });
-  //   console.log("tets",this);
-  //   // this.setState({
-  //   //   "path": location
-  //   // })
-  // }
+  handlePath = (event) => {
+    let location;
+    var files = event.target.files;
+    if (!files.length) {
+      return alert('Please choose a file to upload first.');
+    }
+    var file = files[0];
+    var fileName = uuid();
+    var albumPhotosKey = 'users/';
+    var photoKey = albumPhotosKey + fileName;
+    console.log({
+      photoKey,
+      file,
+    });
+    s3.upload({
+      Key: photoKey,
+      Body: file,
+      ACL: 'public-read'
+    }, (err, data) => {
+      if (err) {
+        console.log(err);
+        return console.error('There was an error uploading your photo: ', err.message);
+      }
+      console.log('Successfully uploaded photo.', data.Location, this.state);
+      this.setState({
+        "avatar": data.Location
+      });
+  })
+
+}
 
   render () {
+    const styles = {
+      button: {
+        margin: 12,
+      },
+      exampleImageInput: {
+        cursor: 'pointer',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        width: '100%',
+        opacity: 0,
+      },
+    };
     return (
       <div>
         <TextField
@@ -134,6 +148,22 @@ class CreateUserComponent extends React.Component {
           value={this.state.username}
           onChange={this.handleChanges}
         /><br />
+        <RaisedButton
+           label="Choose an Image"
+           labelPosition="before"
+           style={styles.button}
+           containerElement="label"
+          //  onCh``ange={this.handlePath}
+        >
+          <input
+            id="files"
+            type="file"
+            ref="image"
+            style={styles.exampleImageInput}
+            onChange={this.handlePath}
+          />
+        </RaisedButton>
+        <br />
         <TextField
           hintText="Password"
           floatingLabelText="Choose password"

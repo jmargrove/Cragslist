@@ -3,6 +3,11 @@ export const listWalls = (walls) => ({
   walls
 })
 
+export const listUsers = (users) => ({
+  type: "LIST_ALL_USERS",
+  users
+})
+
 
 export const tabSwitch = (tabNum) => ({
   type: "SWITCH_THE_TAB",

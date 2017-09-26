@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import uuid from 'uuid/v4';
 
 import moment from 'moment';
 
@@ -89,7 +90,7 @@ class WallEditorComponent extends React.Component {
   }
 
   handleSubmit = (e) => {
-    this.createAlbum('walls');
+    // this.createAlbum('walls');
     console.log("state when we SET THE ROUTE", this.state);
     this.createWall({
       name: this.state.name,
@@ -107,7 +108,7 @@ class WallEditorComponent extends React.Component {
       return alert('Please choose a file to upload first.');
     }
     var file = files[0];
-    var fileName = file.name;
+    var fileName = uuid();
     var albumPhotosKey = 'walls/';
     var photoKey = albumPhotosKey + fileName;
     console.log({
@@ -118,13 +119,15 @@ class WallEditorComponent extends React.Component {
       Key: photoKey,
       Body: file,
       ACL: 'public-read'
-    }, function(err, data) {
+    }, (err, data) => {
       if (err) {
         console.log(err);
         return console.error('There was an error uploading your photo: ', err.message);
       }
       console.log('Successfully uploaded photo.', data.Location, this.state);
-      location = data.Location;
+      this.setState({
+        path: data.Location
+      });
     });
     console.log("tets",this);
     // this.setState({

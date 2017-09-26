@@ -1,5 +1,6 @@
 const initialState = {
     walls: [],
+    users: [],
     tabNum: ''
 }
 
@@ -9,6 +10,12 @@ const wallReducer = (state = initialState, action) => {
     return {
       ...state,
       walls: action.walls
+    }
+    break;
+    case "LIST_ALL_USERS":
+    return {
+      ...state,
+      users: action.users
     }
     break;
     case "SWITCH_THE_TAB":
