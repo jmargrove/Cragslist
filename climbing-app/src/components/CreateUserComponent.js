@@ -76,11 +76,20 @@ class CreateUserComponent extends React.Component {
   handleSubmit = (e) => {
     // this.createAlbum('users');
     console.log("we created user", this.state);
+    if (!this.state.avatar) {
+      this.state.avatar = 'http://4sport.ua/_upl/2/1418/1_1417552431.jpg'
+    }
     this.createUser({
       username: this.state.username,
       password: this.state.password,
       category: this.state.category,
       avatar: this.state.avatar
+    })
+    this.setState({
+      username: '',
+      password: '',
+      category: '',
+      avatar: ''
     })
   }
 
@@ -147,6 +156,7 @@ class CreateUserComponent extends React.Component {
           name="username"
           value={this.state.username}
           onChange={this.handleChanges}
+          required
         /><br />
         <RaisedButton
            label="Choose an Image"

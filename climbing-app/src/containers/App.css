@@ -1,8 +1,8 @@
 .App {
-  /*display: flex;*/
+  display: flex;
   /*padding-top: 1*/
 }
-.WallLable .UserLable {
+.WallLable {
   display: flex;
   width:50%;
   flex-grow:2;
@@ -10,7 +10,30 @@
   padding: 3px;
 }
 
-.WallList .UserList {
+img {
+  width: 50%
+}
+.UserLable {
+  display: flex;
+  width:70%;
+  flex-grow:2;
+  /*flex-basis: auto;*/
+  padding: 3px;
+}
+
+.UserList {
+  display: flex;
+
+  flex-wrap: wrap;
+  padding-left: 5%;
+  padding-right: 5%;
+
+  /*overflow-y: auto;*/
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.WallList {
   display: flex;
   /*flex-direction: row;*/
   /*flex-shrink: 1;*/
@@ -24,10 +47,15 @@
   max-height: 90vh;
 }
 
-.Dashboard .Ranking{
+.Dashboard {
   display: flex;
   flex-direction: column;
   /*justify-content: center;*/
+}
+
+.Ranking {
+  display: flex;
+  flex-direction: column;
 }
 
 .Navigation {

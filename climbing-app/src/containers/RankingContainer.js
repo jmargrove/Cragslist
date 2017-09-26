@@ -19,11 +19,15 @@ class RankingComponent extends React.Component {
     this.state = {users: ''};
   }
 
+  Sort (a, b) {
+    return b.points - a.points;
+  }
+
   fetchUsers () {
     fetch('http://Karina-MacBookPro.local:3000/ranking')
     .then(users => users.json())
     .then(users => {
-      return users;
+      return users.sort(this.Sort);
     })
     .then(fetchedUsers => {
       this.setState({users: fetchedUsers});
