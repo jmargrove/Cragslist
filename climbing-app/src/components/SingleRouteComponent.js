@@ -42,8 +42,10 @@ class SingleRouteComponent extends React.Component {
     console.log(this.props.wall);
     return (
       <div>
+        <div className="RouteView">
+          <img src={this.state.walls.path} />
+        </div>
         <h1>hey {this.state.walls.name}</h1>
-        <img src={this.state.walls.path} />
       </div>
     )
   }

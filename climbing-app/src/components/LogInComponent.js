@@ -2,6 +2,10 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import {
+  Link
+} from 'react-router-dom';
+
 class LogInComponent extends React.Component {
 
   state = {
@@ -41,6 +45,9 @@ class LogInComponent extends React.Component {
           value={this.state.password}
           onChange={this.handleChanges}
         />
+      <Link to={`/${this.state.username}`}>
+        <RaisedButton label="Log-in" fullWidth={true} primary={true} onClick={this.handleSubmit} />
+      </Link>
       </div>
     )
   }
