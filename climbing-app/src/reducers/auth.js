@@ -8,7 +8,10 @@ const auth = (state = defaultAuthState, action) => {
     case 'SET_AUTHORIZATION':
       return action.data
       break;
-  }
+      // case 'DELETE_AUTHORIZATION':
+      //   return ''
+      //   break;
+    }
   return state;
 }
 

@@ -39,6 +39,7 @@ class ProfileComponent extends React.Component {
   }
 
   fetchUser () {
+    console.log(this.props);
     const path = this.props.myProfile ? 'me' : `users/${this.props.user.username}`;
     fetch(`http://Karina-MacBookPro.local:3000/${path}`, {
       headers: {
@@ -49,7 +50,14 @@ class ProfileComponent extends React.Component {
     .then(user => {
       console.log(user);
       this.setState({users: user});
+    })
+    .catch((e) => {
+      console.log(e);
     });
+  }
+
+  handleChanges = (e) => {
+
   }
   render () {
     return (
@@ -64,6 +72,7 @@ class ProfileComponent extends React.Component {
         <h2>
           {`${this.state.users.points} points`}
         </h2>
+
       </div>
     )
   }
@@ -74,7 +83,7 @@ const mapStateToProps = (state, ownProps) => {
   console.log(ownProps);
   const username = ownProps.match && ownProps.match.params.name
     ? ownProps.match.params.name
-    : state.auth.user !== null
+    : state.auth.user !== null && state.auth.user 
       ? state.auth.user.username
       : null;
 
@@ -89,7 +98,11 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  listUsers: (users) => dispatch(listUsers(users)),
+  listUsers: (users) => dispatch(listUsers(users))
+  // deleteAuth: () => dispatch({
+  //   type: 'DELETE_AUTHORIZATION',
+  //
+  // })
   // tabSwitch: (tabNum) => dispatch(tabSwitch(tabNum))
 })
 

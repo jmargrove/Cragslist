@@ -41,7 +41,6 @@ class Routes extends React.Component {
     return (
       <Router>
         <div>
-          <AppBarComponent />
           <Switch>
             <Route path="/routes/:name" component={SingleRouteComponent}/>
             <Route exact path="/" component={DashboardContainer}/>

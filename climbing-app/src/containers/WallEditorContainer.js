@@ -55,7 +55,7 @@ class WallEditorComponent extends React.Component {
   }
 
   createWall = (data) => {
-    fetch('http://Karina-MacBookPro.local:3000/routes', {
+    fetch('http://Karina-MacBookPro.local:3000/route', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -95,6 +95,9 @@ class WallEditorComponent extends React.Component {
   handleSubmit = (e) => {
     // this.createAlbum('walls');
     console.log("state when we SET THE ROUTE", this.state);
+    if (!this.state.path) {
+      this.state.path = 'http://www.planet-rock.com/wp-content/uploads/2017/08/MoonBoard.jpg'
+    }
     this.createWall({
       name: this.state.name,
       path: this.state.path,
@@ -129,7 +132,7 @@ class WallEditorComponent extends React.Component {
       }
       console.log('Successfully uploaded photo.', data.Location, this.state);
       this.setState({
-        path: data.Location
+        "path": data.Location
       });
     });
     console.log("tets",this);
@@ -155,6 +158,9 @@ class WallEditorComponent extends React.Component {
     };
     return (
       <div>
+        <h4>
+          Customize your route
+        </h4>
         <TextField
           hintText="Plastic tortilla"
           floatingLabelText="Choose route name"

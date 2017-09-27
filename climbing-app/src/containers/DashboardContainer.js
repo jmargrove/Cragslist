@@ -33,18 +33,20 @@ class DashboardComponent extends React.Component {
   }
 
   render () {
-    // if (this.state.walls.length < 1) {
-    //   return (
-    //     <div>
-    //       <img src='https://cdn.ukc2.com/i/259558.jpg'
-    //       alt=''
-    //     />
-    //       <h1>
-    //         Route setting in process
-    //       </h1>
-    //     </div>
-    //   )
-    // } else {
+    if (this.state.walls.length < 1) {
+      return (
+        <div className="Nothing">
+          <div className="NothingImg">
+            <img src='https://cdn.ukc2.com/i/259558.jpg'
+            alt=''
+          />
+          </div>
+          <h2>
+            Route setting in process
+          </h2>
+        </div>
+      )
+    } else {
       return (
         <div>
           <div className="Dashboard">
@@ -52,7 +54,7 @@ class DashboardComponent extends React.Component {
           </div>
         </div>
       )
-    // }
+    }
   }
 }
 
