@@ -16,6 +16,16 @@
   height: 92vh;
 }
 
+.ButtonCancel .Title{
+  display: flex;
+}
+
+.LogInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .ButtonsLogIn {
   display: flex;
   flex-wrap: wrap;
@@ -85,8 +95,9 @@ img {
   max-height: 90vh;
 }
 
-h1, h2, h4{
+h1, h2, h3, h4{
   text-align: center;
+  font-family: 'Audiowide', cursive;
 }
 .Ranking {
   display: flex;

@@ -17,7 +17,7 @@ class WallListComponent extends React.Component {
             <Link to={`/routes/${wall.name}`}>
           <Card>
             <CardMedia
-              overlay={<CardTitle title={wall.name} subtitle={wall.difficulty} />}
+              overlay={<CardTitle title={wall.name} subtitle={wall.difficulty} style={{fontFamily: 'Audiowide'}} />}
             >
               <img src={wall.path} alt="" />
             </CardMedia>

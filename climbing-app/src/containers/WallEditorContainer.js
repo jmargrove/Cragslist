@@ -144,6 +144,7 @@ class WallEditorComponent extends React.Component {
     const styles = {
       button: {
         margin: 12,
+        fontFamily: 'Audiowide'
       },
       exampleImageInput: {
         cursor: 'pointer',

@@ -44,39 +44,43 @@ class UserLoginComponent extends React.Component {
   render () {
     return (
       <div className="LogInMain">
-        <div className="ButtonCancel">
-          <Link to='/'>
+        <div className="Buttons">
+          {/* <div className="ButtonCancel">
+            <Link to='/'>
             <RaisedButton label="Cancel" primary={true} />
           </Link>
+          </div> */}
+          <div className="Title">
+            <h1>
+              Log-in
+            </h1>
+          </div>
         </div>
-        <div className="Title">
-          <h1>
-          Log-in
-          </h1>
+        <div className="LogInfo">
+          <TextField
+            hintText="Username"
+            floatingLabelText="Enter username"
+            id="inputName"
+            name="username"
+            value={this.state.username}
+            onChange={this.handleChanges}
+          />
+          <TextField
+            hintText="Password"
+            floatingLabelText="Enter password"
+            id="inputName"
+            name="password"
+            type="password"
+            value={this.state.password}
+            onChange={this.handleChanges}
+          />
         </div>
-        <TextField
-          hintText="Username"
-          floatingLabelText="Enter username"
-          id="inputName"
-          name="username"
-          value={this.state.username}
-          onChange={this.handleChanges}
-        />
-        <TextField
-          hintText="Password"
-          floatingLabelText="Enter password"
-          id="inputName"
-          name="password"
-          type="password"
-          value={this.state.password}
-          onChange={this.handleChanges}
-        />
         <div className="ButtonsLogIn">
           <Link to={`/${this.state.username}`}>
           <RaisedButton label="Log-in" primary={true} onClick={this.handleSubmit} />
         </Link><br/>
           <Link to='/create-user'>
-            <RaisedButton label="No acccount yet" primary={true} />
+            <RaisedButton label="No account yet" primary={true} />
           </Link>
 
         </div>
