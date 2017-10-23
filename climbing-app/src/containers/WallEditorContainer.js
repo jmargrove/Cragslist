@@ -157,10 +157,12 @@ class WallEditorComponent extends React.Component {
       },
     };
     return (
-      <div>
-        <h4>
-          Customize your route
-        </h4>
+      <div className="WallEditor">
+        <div className="Title">
+          <h2>
+            Customize your route
+          </h2>
+        </div>
         <TextField
           hintText="Plastic tortilla"
           floatingLabelText="Choose route name"
@@ -170,11 +172,10 @@ class WallEditorComponent extends React.Component {
           onChange={this.handleChanges}
         /><br />
         <RaisedButton
-           label="Choose an Image"
-           labelPosition="before"
-           style={styles.button}
-           containerElement="label"
-          //  onChange={this.handlePath}
+          label="Choose an Image"
+          labelPosition="before"
+          style={styles.button}
+          containerElement="label"
         >
           <input
             id="files"

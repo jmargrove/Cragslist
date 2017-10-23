@@ -12,16 +12,13 @@ import { connect } from 'react-redux';
 import DashboardContainer from './containers/DashboardContainer';
 import SignInComponent from './containers/SignInComponent';
 import NavigationComponent from './components/NavigationComponent';
-import AppBarComponent from './components/AppBarComponent';
 import WallEditorContainer from './containers/WallEditorContainer';
 import SingleRouteComponent from './components/SingleRouteComponent';
-// import LogInComponent from './components/LogInComponent';
 import CreateUserComponent from './components/CreateUserComponent';
 import RankingContainer from './containers/RankingContainer';
 import ProfileComponent from './components/ProfileComponent';
 import UserLoginContainer from './containers/UserLoginContainer';
-// {console.log("hey route");}
-// const state = store.getState();
+
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route {...rest} render={props => (
@@ -60,24 +57,12 @@ class Routes extends React.Component {
   }
 }
 
-const Rating = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
-
 
 const User = () => (
   <div>
     <h2>User page</h2>
   </div>
 )
-//
-// const WallChild = ({match}) => (
-//   <div>
-//     <h2>{match.params.name}</h2>
-//   </div>
-// )
 
 const mapStateToProps = (state) => ({
   auth: state.auth

@@ -49,7 +49,11 @@ class UserLoginComponent extends React.Component {
             <RaisedButton label="Cancel" primary={true} />
           </Link>
         </div>
-        <h1>Log-in</h1>
+        <div className="Title">
+          <h1>
+          Log-in
+          </h1>
+        </div>
         <TextField
           hintText="Username"
           floatingLabelText="Enter username"
@@ -57,7 +61,7 @@ class UserLoginComponent extends React.Component {
           name="username"
           value={this.state.username}
           onChange={this.handleChanges}
-        /><br />
+        />
         <TextField
           hintText="Password"
           floatingLabelText="Enter password"
@@ -68,11 +72,11 @@ class UserLoginComponent extends React.Component {
           onChange={this.handleChanges}
         />
         <div className="ButtonsLogIn">
+          <Link to={`/${this.state.username}`}>
+          <RaisedButton label="Log-in" primary={true} onClick={this.handleSubmit} />
+        </Link><br/>
           <Link to='/create-user'>
             <RaisedButton label="No acccount yet" primary={true} />
-          </Link>
-          <Link to={`/${this.state.username}`}>
-            <RaisedButton label="Log-in" primary={true} onClick={this.handleSubmit} />
           </Link>
 
         </div>
@@ -82,7 +86,7 @@ class UserLoginComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
