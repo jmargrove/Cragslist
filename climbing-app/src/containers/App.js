@@ -6,11 +6,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const muiTheme = getMuiTheme({
   fontFamily: 'Exo 2',
-  // palette:{
-  //   pickerHeaderColor:"#C0CA33",
-  //   primary1Color: "#C0CA33",
-  //   primary2Color: "#C0CA33",
-  // }
 })
 
 class App extends Component {

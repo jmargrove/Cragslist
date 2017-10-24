@@ -49,7 +49,7 @@ class RankingComponent extends React.Component {
     // } else {
       return (
         <div className="Ranking">
-          <h3>Ranking</h3>
+          <h2>Ranking</h2>
           <RankingListComponent allUsers={this.state.users} />
         </div>
       )

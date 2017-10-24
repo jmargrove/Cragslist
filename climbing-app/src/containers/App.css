@@ -83,7 +83,7 @@ img {
   padding-left: 5%;
   padding-right: 5%;
   overflow-y: auto;
-  max-height: 90vh;
+  max-height: 81vh;
 }
 
 .WallList {
@@ -110,10 +110,17 @@ h1, h2, h3, h4{
   width:100%;
   height: 8vh;
   margin-left:-20px;
+    z-index: 1;
 }
 
 .RouteView img {
   width:120%;
   margin:-20px;
   margin-bottom:10px;
+}
+
+.UserView img {
+  width:50%;
+  margin:auto;
+  display:block;
 }

@@ -61,7 +61,7 @@ class ProfileComponent extends React.Component {
   }
   render () {
     return (
-      <div className="RouteView">
+      <div className="UserView">
         <img src={this.state.users.avatar} alt={this.state.users.name} />
         <h1>
           {this.state.users.username}
@@ -83,7 +83,7 @@ const mapStateToProps = (state, ownProps) => {
   console.log(ownProps);
   const username = ownProps.match && ownProps.match.params.name
     ? ownProps.match.params.name
-    : state.auth.user !== null && state.auth.user 
+    : state.auth.user !== null && state.auth.user
       ? state.auth.user.username
       : null;
 
