@@ -2,7 +2,7 @@
 
 Mobile React app to post climbing routes and compete with other climbers by getting points from completing those routes.
 
-![alt text](https://s3-eu-west-1.amazonaws.com/climbing-kd/custom/Screen+Shot+2017-10-23+at+18.13.01.png) "Route Setter")
+![Set Route preview](https://s3-eu-west-1.amazonaws.com/climbing-kd/custom/Screen+Shot+2017-10-23+at+18.13.01.png)
 
 ## Installation
 
