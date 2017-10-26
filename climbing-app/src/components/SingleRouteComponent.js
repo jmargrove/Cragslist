@@ -80,12 +80,10 @@ const mapStateToProps = (state, ownProps) => ({
     return ownProps.match.params.name;
   }),
   auth: state.auth
-  // tabNum: state.tabNum
 })
 
 const mapDispatchToProps = (dispatch) => ({
   listWalls: (walls) => dispatch(listWalls(walls)),
-  // tabSwitch: (tabNum) => dispatch(tabSwitch(tabNum))
 })
 
 

@@ -37,34 +37,21 @@ class RankingComponent extends React.Component {
   }
 
   render () {
-    // if (this.state.users.length < 1) {
-    //   return(
-    //     <div>
-    //       <h1>Climbers are not here yet</h1>
-    //         <img src='https://s-media-cache-ak0.pinimg.com/originals/28/a9/ab/28a9abd1cf9a544539cd546957d037fd.jpg'
-    //         alt=''
-    //       />
-    //     </div>
-    //   )
-    // } else {
       return (
         <div className="Ranking">
           <h2>Ranking</h2>
           <RankingListComponent allUsers={this.state.users} />
         </div>
       )
-    // }
   }
 }
 
 const mapStateToProps = (state) => ({
   users: state.data.users,
-  // tabNum: state.tabNum
 })
 
 const mapDispatchToProps = (dispatch) => ({
   listUsers: (users) => dispatch(listUsers(users)),
-  // tabSwitch: (tabNum) => dispatch(tabSwitch(tabNum))
 })
 
 export default  connect(mapStateToProps, mapDispatchToProps)(RankingComponent);

@@ -120,7 +120,8 @@ h1, h2, h3, h4{
 }
 
 .UserView img {
-  width:50%;
-  margin:auto;
-  display:block;
+  width:120%;
+  margin:-20px;
+  /*margin:auto;
+  display:block;*/
 }

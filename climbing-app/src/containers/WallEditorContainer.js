@@ -135,10 +135,6 @@ class WallEditorComponent extends React.Component {
         "path": data.Location
       });
     });
-    console.log("tets",this);
-    // this.setState({
-    //   "path": location
-    // })
   }
   render () {
     const styles = {

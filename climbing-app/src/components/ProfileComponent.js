@@ -99,11 +99,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   listUsers: (users) => dispatch(listUsers(users))
-  // deleteAuth: () => dispatch({
-  //   type: 'DELETE_AUTHORIZATION',
-  //
-  // })
-  // tabSwitch: (tabNum) => dispatch(tabSwitch(tabNum))
 })
 
 

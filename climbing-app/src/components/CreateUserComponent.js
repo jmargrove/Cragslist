@@ -150,7 +150,6 @@ class CreateUserComponent extends React.Component {
            labelPosition="before"
            style={styles.button}
            containerElement="label"
-          //  onCh``ange={this.handlePath}
         >
           <input
             id="files"
@@ -166,6 +165,7 @@ class CreateUserComponent extends React.Component {
           floatingLabelText="Choose password"
           id="inputName"
           name="password"
+          type="password"
           value={this.state.password}
           onChange={this.handleChanges}
         /><br />
