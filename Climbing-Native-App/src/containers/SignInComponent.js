@@ -13,19 +13,20 @@ class SignInComponent extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        {/* <Image style={styles.backgroundImage} source={{uri: "https://s3-eu-west-1.amazonaws.com/climbing-kd/custom/rocks.png"}}/> */}
-        <View style={styles.boxes}>
-          <View style={styles.TitleBox}>
-            <Text style={styles.Title}>log-in</Text>
+        <View style={styles.backgroundImage} source={{uri: "https://s3-eu-west-1.amazonaws.com/climbing-kd/custom/rocks.png"}}>
+          <View style={styles.boxes}>
+            <View style={styles.TitleBox}>
+              <Text style={styles.Title}>log-in</Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.boxes}>
-          <TextInput style={styles.inputBox}/>
-          <TextInput style={styles.inputBox}/>
-        </View>
-        <View style={styles.boxes}>
-          <Button raised primary text="log-in"/>
-          <Button raised primary text="Create account"/>
+          <View style={styles.boxes}>
+            <TextInput style={styles.inputBox}/>
+            <TextInput style={styles.inputBox}/>
+          </View>
+          <View style={styles.boxes}>
+            <Button style={styles.button} raised primary text="log-in"/>
+            <Button style={styles.button} raised primary text="Create account"/>
+          </View>
         </View>
       </View>
     )
@@ -35,7 +36,6 @@ class SignInComponent extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'orange',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: 300,
     height: 100,
-    borderColor: 'black',
+    borderColor: 'lightblue',
     justifyContent: 'space-around',
   },
   TitleBox: {
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'orange',
+    fontSize: 25,
   }
 });
 
