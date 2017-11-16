@@ -1,23 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import Navigation from './src/components/Navigation';
+
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+            <Navigation />
     );
   }
 }
 
+//ADDED BACKGROUND IMAGE AND CONTAINERS TO REGULATE THE BEHAVIOR OF IT
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  imagecontainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  backgroundimage: {
+    flex: 1,
+    resizeMode: 'stretch',
+    width: '100%',
+    justifyContent: 'center',
+    padding: 10,
+    overflow: 'visible',
+    backgroundColor: 'powderblue',
+
+  }
 });
