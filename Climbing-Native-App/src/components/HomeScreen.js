@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
-import { TabNavigator } from 'react-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const styles = StyleSheet.create({
   home: {

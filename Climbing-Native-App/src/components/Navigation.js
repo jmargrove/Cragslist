@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen';
+import Login from '../containers/Login'
 
 export const Navigation = TabNavigator({
   Home: {
@@ -18,6 +19,19 @@ export const Navigation = TabNavigator({
       ),
     },
   },
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Ionicons
+          name={focused ? 'ios-person' : 'ios-person-outline'}
+          size={27}
+          style={{ color: tintColor }}
+        />
+      ),
+    },
+  }
 
 });
 
