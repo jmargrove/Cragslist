@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
 // import { RaisedButton } from 'react-native-material-ui'
 import { Navigator, NativeModules } from 'react-native';
-import { Button } from 'react-native-material-ui';
+
 
 
 
@@ -24,8 +24,19 @@ class SignInComponent extends React.Component {
             <TextInput style={styles.inputBox}/>
           </View>
           <View style={styles.boxes}>
-            <Button style={styles.button} raised primary text="log-in"/>
-            <Button style={styles.button} raised primary text="Create account"/>
+            <Button
+              title="Log-in"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+            <Button
+              style={styles.button}
+              title="Sign-up"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+            {/* <Button style={styles.button} raised primary text="log-in"/> */}
+            {/* <Button style={styles.button} raised primary text="Create account"/> */}
           </View>
         </View>
       </View>
@@ -35,6 +46,9 @@ class SignInComponent extends React.Component {
 
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: 'lightblue',
+  },
   container: {
     flex: 1,
     flexDirection: 'column',

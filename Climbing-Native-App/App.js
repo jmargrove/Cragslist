@@ -20,9 +20,9 @@ const uiTheme = {
 export default class App extends React.Component {
   render() {
     return (
-      <ThemeProvider uiTheme={uiTheme}>
+
         <SignInComponent/>
-      </ThemeProvider>
+
     );
   }
 }
