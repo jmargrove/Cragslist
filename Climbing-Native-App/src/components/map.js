@@ -1,36 +1,68 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
+import { TextInput, StyleSheet, Text, View, Image, Button } from 'react-native';
 import { Navigator, NativeModules } from 'react-native';
 import MapView from 'react-native-maps';
 
+var markers = [
+  {
+    latitude: 41.390205,
+    longitude: 2.154007,
+    title: 'Foo Place',
+    subtitle: '1234 Foo Drive'
+  }
+];
+
 class Maps extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: 'Climb where?',
+      coordinate: {latitude: 41.390205, longitude: 2.154007 }
+    };
+  }
+
+  componentDidMount(){
+    navigator.geolocation.getCurrentPosition( (position) => {
+      console.log(position)
+      this.setState({
+        coordinate: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        }
+      })
+    })
+  }
+
+  mapLoad(){
+    return(<MapView
+      onPress={e => this.setState({coordinate: e.nativeEvent.coordinate})}
+      provider={"google"}
+      style={styles.map}
+      showsUserLocation={true}
+      showsMyLocationButton={true}
+      initialRegion={{
+        latitude: this.state.coordinate.latitude,
+        longitude: this.state.coordinate.longitude,
+        latitudeDelta: 0.0462,
+        longitudeDelta: 0.0221,
+      }}>
+      <MapView.Marker
+        // onPress={e => console.log(e.nativeEvent)}
+        coordinate={this.state.coordinate}/>
+    </MapView>)
+  }
 
 
   render () {
     return (
       <View style={styles.container}>
-        <MapView
-          provider={"google"}
-          style={styles.map}
-          showsUserLocation={true}
-          showsMyLocationButton={true}
-          showsPointsOfInterest={true}
-          showsCompass={true}
-          initialRegion={{
-            latitude: 41.390205,
-            longitude: 2.154007,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-        />
-          <MapView.Marker
-            coordinate={{
-              latitude: 41.390205,
-              longitude: 2.154007}}>
-              <View style={styles.radius}>
-                <View style={styles.marker}></View>
-              </View>
-          </MapView.Marker>
+        <View style={styles.header}/>
+        <View style={styles.searchBox}>
+          <View style={styles.menu}/>
+          <View style={styles.go}><Text>Select-spot</Text></View>
+        </View>
+        {this.mapLoad()}
       </View>
     )
   }
@@ -38,34 +70,28 @@ class Maps extends React.Component {
 
 
 const styles = StyleSheet.create({
-  radius:{
-    height: 50,
-    width: 50,
-    borderRadius: 50/2,
-    overflow: 'hidden',
-    backgroundColor: 'red',
-    borderWidth: 1,
-    borderColor: 'purple',
-    justifyContent: 'center',
-    alignItems: 'center',
+  go: {
+    flex: 2,
+    margin: 7,
+    backgroundColor: 'yellow',
   },
-  marker: {
-    height: 20,
-    width: 20,
-    borderRadius: 20/2,
-    borderColor: 'white',
-    overflow: 'hidden',
-    backgroundColor: 'orange',
+  searchBox: {
+    flex: 7,
+    backgroundColor: 'grey',
+    flexDirection: 'row',
+  },
+  header: {
+    flex: 3,
+    backgroundColor: 'white',
+    // justifyContent: 'flex-end',
+    // flexDirection: 'column',
   },
   map: {
-    width: '100%',
-    height: '100%',
+    flex: 90,
   },
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around',
     backgroundColor: 'orange',
   },
 });
