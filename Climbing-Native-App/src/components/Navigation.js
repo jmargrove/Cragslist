@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen';
-import Maps from './map';
+import Maps from './Maps';
 import Login from '../containers/Login'
 
 export const Navigation = TabNavigator({
@@ -23,7 +23,7 @@ export const Navigation = TabNavigator({
   Login: {
     screen: Login,
     navigationOptions: {
-      tabBarLabel: 'Home',
+      tabBarLabel: 'Profile',
       tabBarIcon: ({ tintColor, focused }) => (
         <Ionicons
           name={focused ? 'ios-person' : 'ios-person-outline'}
@@ -46,6 +46,19 @@ export const Navigation = TabNavigator({
       ),
     },
   }
+  // Maps: {
+  //   screen: Maps,
+  //   navigationOptions: {
+  //     tabBarLabel: 'Maps',
+  //     tabBarIcon: ({ tintColor, focused }) => (
+  //       <Ionicons
+  //         name={focused ? 'ios-pin' : 'ios-pin-outline'}
+  //         size={27}
+  //         style={{ color: tintColor }}
+  //       />
+  //     ),
+  //   },
+  // }
 
 });
 
