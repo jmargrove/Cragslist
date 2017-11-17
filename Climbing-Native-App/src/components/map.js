@@ -41,7 +41,7 @@ class Maps extends React.Component {
       style={styles.map}
       showsUserLocation={true}
       showsMyLocationButton={true}
-      initialRegion={{
+      region={{
         latitude: this.state.coordinate.latitude,
         longitude: this.state.coordinate.longitude,
         latitudeDelta: 0.0462,
@@ -54,13 +54,25 @@ class Maps extends React.Component {
   }
 
 
+  openPhoto(){
+
+  }
+
   render () {
     return (
       <View style={styles.container}>
         <View style={styles.header}/>
         <View style={styles.searchBox}>
           <View style={styles.menu}/>
-          <View style={styles.go}><Text>Select-spot</Text></View>
+          <View style={styles.go}>
+            <Button
+              style={styles.button}
+              onPress={e => console.log(e)}
+              title="TAKE PHOTO"
+              color="black"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
         </View>
         {this.mapLoad()}
       </View>
@@ -72,7 +84,9 @@ class Maps extends React.Component {
 const styles = StyleSheet.create({
   go: {
     flex: 2,
-    margin: 7,
+    margin: 3,
+    marginLeft: 100,
+    marginRight: 100,
     backgroundColor: 'yellow',
   },
   searchBox: {
