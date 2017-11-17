@@ -24,6 +24,7 @@
     "material-ui-native": "^0.0.2",
     "react": "16.0.0-beta.5",
     "react-native": "^0.49.5",
+    "react-native-sketch": "git://github.com/houserater/react-native-sketch.git#hank.brekke/set-sketch-image",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.19",
