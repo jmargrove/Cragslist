@@ -24,12 +24,8 @@
     "material-ui-native": "^0.0.2",
     "react": "16.0.0-beta.5",
     "react-native": "^0.49.5",
-<<<<<<< HEAD
     "react-native-maps": "^0.17.1",
-    "react-native-material-ui": "^1.14.0",
-=======
     "react-native-swiper": "^1.5.13",
->>>>>>> 47afb33f138edaec2e54f1362b5e79a5db01563f
     "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.19",
     "watchman": "^0.1.8"
