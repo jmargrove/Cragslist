@@ -64,7 +64,7 @@ class Maps extends React.Component {
     })
 
     Font.loadAsync({
-      'NotoSans-Regular': require('./../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
+      'NotoSans-Regular': require('../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
     });
   }
 
