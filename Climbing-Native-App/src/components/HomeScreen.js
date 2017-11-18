@@ -3,7 +3,35 @@ import { Text, StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Welcome from './Welcome';
 import Intro from './Intro';
+import {Font} from 'expo';
 
+
+
+
+export default class HomeScreen extends React.Component {
+   componentDidMount() {
+     Font.loadAsync({
+      // 'satisfy': require('../../assets/Fonts/Satisfy-Regular.ttf'),
+    });
+  }
+  render() {
+    return (
+      <Swiper style={styles.wrapper} showsButtons={true}>
+        {/* <View style={styles.slide1}> */}
+        <Welcome />
+        <Intro />
+        <Text color={'black'} fontFamily={'pacifico'}>Hello</Text>
+        {/* </View> */}
+        <View style={styles.slide2}>
+          <Text style={styles.text}>Beautiful</Text>
+        </View>
+        <View style={styles.slide3}>
+          <Text style={styles.text}>And simple</Text>
+        </View>
+      </Swiper>
+    )
+  }
+}
 
 
 const styles = StyleSheet.create({
@@ -30,25 +58,6 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 30,
-    fontWeight: 'bold',
+    // fontFamily: 'satisfy',
   }
 })
-
-export default class HomeScreen extends React.Component {
-  render() {
-    return (
-      <Swiper style={styles.wrapper} showsButtons={true}>
-        {/* <View style={styles.slide1}> */}
-        <Welcome />
-        <Intro />
-        {/* </View> */}
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-        </View>
-      </Swiper>
-    )
-  }
-}
