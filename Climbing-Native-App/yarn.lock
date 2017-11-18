@@ -4518,6 +4518,12 @@ react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"
 
+react-native-camera@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-0.12.0.tgz#51afa8acf1696d9d973074b6454c5ba2cce6ac18"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -4573,6 +4579,12 @@ react-native-scripts@1.7.0:
     qrcode-terminal "^0.11.0"
     rimraf "^2.6.1"
     xdl "46.0.1"
+
+"react-native-sketch@git://github.com/houserater/react-native-sketch.git#hank.brekke/set-sketch-image":
+  version "1.0.1"
+  resolved "git://github.com/houserater/react-native-sketch.git#d3452ceba3ed7d723e5e0088ebdb0e87cec84df7"
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-svg@5.4.2:
   version "5.4.2"

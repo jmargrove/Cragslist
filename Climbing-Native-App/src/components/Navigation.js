@@ -5,6 +5,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen';
 import Maps from './Maps';
 import Login from '../containers/Login'
+import CameraComp from './CameraComp.js'
+
 
 export const Navigation = TabNavigator({
   Home: {
@@ -39,26 +41,27 @@ export const Navigation = TabNavigator({
       tabBarLabel: 'Map',
       tabBarIcon: ({ tintColor, focused }) => (
         <Ionicons
-          name={focused ? 'ios-person' : 'ios-person-outline'}
+          name={focused ? 'ios-locate' : 'ios-locate-outline'}
+          size={27}
+          style={{ color: tintColor }}
+        />
+      ),
+    },
+  },
+  CameraComp: {
+    screen: CameraComp,
+    navigationOptions: {
+      tabBarLabel: 'Camera',
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Ionicons
+          name={focused ? 'ios-camera' : 'ios-camera-outline'}
           size={27}
           style={{ color: tintColor }}
         />
       ),
     },
   }
-  // Maps: {
-  //   screen: Maps,
-  //   navigationOptions: {
-  //     tabBarLabel: 'Maps',
-  //     tabBarIcon: ({ tintColor, focused }) => (
-  //       <Ionicons
-  //         name={focused ? 'ios-pin' : 'ios-pin-outline'}
-  //         size={27}
-  //         style={{ color: tintColor }}
-  //       />
-  //     ),
-  //   },
-  // }
+
 
 });
 

@@ -1,7 +1,10 @@
 import React from 'react';
 import { TextInput, StyleSheet, Text, View, Image, Button } from 'react-native';
 import { Navigator, NativeModules } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { StackNavigator } from 'react-navigation';
+
 
 var markers = [
   {
@@ -12,13 +15,16 @@ var markers = [
   }
 ];
 
+
+
 class Maps extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       text: 'Climb where?',
-      coordinate: {latitude: 41.390205, longitude: 2.154007 }
+      coordinate: {latitude: 41.390205, longitude: 2.154007 },
+      image: {uri: null}
     };
   }
 
@@ -34,11 +40,19 @@ class Maps extends React.Component {
     })
   }
 
-  mapLoad(){
+  static navigationOptions = {
+    title: 'Welcome',
+  };
+
+  mapLoad(nav){
     return(<MapView
       onPress={e => this.setState({coordinate: e.nativeEvent.coordinate})}
-      provider={"google"}
+      // provider={PROVIDER_GOOGLE}
       style={styles.map}
+      onMarkerPress={(e) => {
+                console.log("is this working ")
+                nav('CameraComp')
+              }}
       showsUserLocation={true}
       showsMyLocationButton={true}
       region={{
@@ -48,46 +62,53 @@ class Maps extends React.Component {
         longitudeDelta: 0.0221,
       }}>
       <MapView.Marker
-        // onPress={e => console.log(e.nativeEvent)}
-        coordinate={this.state.coordinate}/>
+        coordinate={this.state.coordinate}>
+          <View style={styles.marker}></View>
+        </MapView.Marker>
     </MapView>)
   }
 
 
-  openPhoto(){
 
-  }
 
   render () {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View style={styles.header}/>
-        <View style={styles.searchBox}>
-          <View style={styles.menu}/>
-          <View style={styles.go}>
-            <Button
-              style={styles.button}
-              onPress={e => console.log(e)}
-              title="TAKE PHOTO"
-              color="black"
-              accessibilityLabel="Learn more about this purple button"
-            />
-          </View>
-        </View>
-        {this.mapLoad()}
+        {/* <View style={styles.searchBox}/> */}
+        {this.mapLoad(navigate)}
       </View>
     )
   }
 }
 
 
+
+
+
 const styles = StyleSheet.create({
-  go: {
-    flex: 2,
+  marker: {
+    width: 20,
+    height: 20,
+    borderRadius: 20/2,
+    backgroundColor: 'purple',
+  },
+  takePhoto: {
+    flex: 0.5,
     margin: 3,
-    marginLeft: 100,
-    marginRight: 100,
+    backgroundColor: 'red',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  seePhoto: {
+    flex: 0.5,
+    margin: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'yellow',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   searchBox: {
     flex: 7,
@@ -97,8 +118,6 @@ const styles = StyleSheet.create({
   header: {
     flex: 3,
     backgroundColor: 'white',
-    // justifyContent: 'flex-end',
-    // flexDirection: 'column',
   },
   map: {
     flex: 90,
