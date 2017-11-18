@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component }  from 'react';
+import connect from 'react-redux';
 import { TouchableHighlight, TouchableOpacity, TextInput, StyleSheet, Text, View, Image, Button } from 'react-native';
 import { Navigator, NativeModules } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -6,45 +7,44 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { StackNavigator } from 'react-navigation';
 import Modal from 'react-native-modal';
 import { ImagePicker } from 'expo';
+import { addToCragList } from './../../action.js'
 
+//
+// const mapDispatchToProps = (dispatch) => ({
+//   addToCragList: (e) => dispatch(addToCragList(e))
+// })
+//
+// const mapStateToProps = (state) => ({
+//   locations: state.locations
+// })
 
-var markers = [
-  {
-    latitude: 41.390205,
-    longitude: 2.154007,
-    title: 'Foo Place',
-    subtitle: '1234 Foo Drive'
-  }
-];
 
 class Maps extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      text: 'Climb where?',
-      coordinate: {latitude: 41.390205, longitude: 2.154007 },
       modalVisible: false,
       newLocation: {
         name: 'location...',
         description: 'description...',
         image: {uri: null},
+        coordinate: {latitude: 41.390205, longitude: 2.154007 },
       }
     };
   }
 
   _takeImage = async () => {
-    let result = await ImagePicker.launchCameraAsync({
-    });
-    console.log(result);
+    let result = await ImagePicker.launchCameraAsync({});
     if (!result.cancelled) {
       this.setState({newLocation: { image: result.uri }});
     }
   };
 
   _pickImage = async () => {
-  let result = await ImagePicker.launchImageLibraryAsync({
-  })};
+  let result = await ImagePicker.launchImageLibraryAsync({})
+  this.setState({newLocation: { image: result.uri }});
+  };
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -54,9 +54,11 @@ class Maps extends React.Component {
     navigator.geolocation.getCurrentPosition( (position) => {
       console.log(position)
       this.setState({
-        coordinate: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
+        newLocation: {
+          coordinate: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }
         }
       })
     })
@@ -66,25 +68,23 @@ class Maps extends React.Component {
     title: 'Welcome',
   };
 
-  mapLoad(nav){
+  mapLoad(){
     return(<MapView
-      onPress={e => this.setState({coordinate: e.nativeEvent.coordinate})}
-      // provider={PROVIDER_GOOGLE}
+      onPress={e => {
+        console.log(e.nativeEvent)
+        this.setState({newLocation: {coordinate: e.nativeEvent.coordinate}})}}
+      // provider={"google"}
       style={styles.map}
-      onMarkerPress={(e) => {
-                console.log("is this working ")
-                nav('CameraComp')
-              }}
       showsUserLocation={true}
       showsMyLocationButton={true}
       region={{
-        latitude: this.state.coordinate.latitude,
-        longitude: this.state.coordinate.longitude,
+        latitude: this.state.newLocation.coordinate.latitude,
+        longitude: this.state.newLocation.coordinate.longitude,
         latitudeDelta: 0.0462,
         longitudeDelta: 0.0221,
       }}>
       <MapView.Marker
-        coordinate={this.state.coordinate}>
+        coordinate={this.state.newLocation.coordinate}>
           <View style={styles.marker}></View>
         </MapView.Marker>
     </MapView>)
@@ -94,10 +94,6 @@ class Maps extends React.Component {
 
 
   render () {
-    const { navigate } = this.props.navigation;
-
-
-
     return (
       <View style={styles.container}>
         <View style={styles.header}/>
@@ -111,7 +107,7 @@ class Maps extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-          {this.mapLoad(navigate)}
+          {this.mapLoad()}
           <Modal
             animationInTiming={5000}
             animationOutTiming={5000}
@@ -289,4 +285,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default Maps;
+// export default connect(mapStateToProps, mapDispatchToProps)(Maps);
+export default (Maps);

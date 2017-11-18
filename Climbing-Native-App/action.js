@@ -1,6 +1,6 @@
-export const addToCragList = (coords) => {
+export const addToCragList = (loc) => {
   return ({
-    type: 'ADD_COORDS',
-    newCoords: coords,
+    type: 'ADD_NEW_LOCATION',
+    newLoc: loc,
   })
 }
