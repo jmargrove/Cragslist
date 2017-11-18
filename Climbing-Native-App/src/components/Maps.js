@@ -17,8 +17,6 @@ var markers = [
   }
 ];
 
-
-
 class Maps extends React.Component {
 
   constructor(props) {
@@ -64,7 +62,7 @@ class Maps extends React.Component {
     })
 
     Font.loadAsync({
-      'NotoSans-Regular': require('./../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
+      'Pacifico-Regular': require('./../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
     });
   }
 
@@ -192,7 +190,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontFamily: 'NotoSans-Regular',
+    fontFamily: 'Pacifico-Regular',
     fontSize: 20,
     backgroundColor: 'yellow',
   },
