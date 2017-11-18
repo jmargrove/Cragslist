@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import Welcome from './Welcome';
-import Intro from './Intro';
 import { Font } from 'expo';
-
-
 
 
 class HomeScreen extends React.Component {
@@ -21,54 +17,102 @@ class HomeScreen extends React.Component {
     this.setState({fontLoaded: true})
   }
 
-  render() {
-    if(this.state.fontLoaded){
+render() {
+  if (this.state.fontLoaded) {
     return (
-      <Swiper style={styles.wrapper} showsButtons={true}>
-        {/* <View style={styles.slide1}> */}
-        <Welcome />
-        <Intro />
-        {/* </View> */}
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
+      <Swiper style={styles.wrapper} showsButtons={true} buttonColor={'white'} dotColor={'white'} activeDotColor={'pink'} autoplay={true}>
+        <View style={styles.container}>
+          <View style={styles.imagecontainer}>
+            <Image style={styles.backgroundimage} source={{
+              uri: 'https://www.dropbox.com/s/2xub9ntzzraayt8/cragslist-homescreen-10.jpg?dl=1'
+            }}/>
+          </View>
+          <View style={styles.home}>
+            <Text style={styles.hometext}>Welcome to</Text>
+            <Text style={styles.logo}>Cragslist</Text>
+          </View>
         </View>
-        <View style={styles.slide3}>
-          <Text style={{fontFamily:'Pacifico-Regular'}}>And simple</Text>
+        <View style={styles.container}>
+          <View style={styles.imagecontainer}>
+            <Image style={styles.backgroundimage} source={{
+              uri: 'https://www.dropbox.com/s/ljjx7wzy4cpptg7/cragslist-homescreen-02.jpg?dl=1'
+            }}/>
+          </View>
+          <View style={styles.home}>
+            <Text style={styles.hometext}>Create your climber profile</Text>
+          </View>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.imagecontainer}>
+            <Image style={styles.backgroundimage} source={{
+              uri: 'https://www.dropbox.com/s/yfhslq1yyt0i70n/cragslist-homescreen-05.jpg?dl=1'
+            }}/>
+          </View>
+          <View style={styles.home}>
+            <Text style={styles.hometext}>Mark your favorite locations</Text>
+          </View>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.imagecontainer}>
+            <Image style={styles.backgroundimage} source={{
+              uri: 'https://www.dropbox.com/s/qwi9vorzwx3t0bb/cragslist-homescreen-04.jpg?dl=1'
+            }}/>
+          </View>
+          <View style={styles.home}>
+            <Text style={styles.hometext}>Add your dream locations</Text>
+          </View>
         </View>
       </Swiper>
     )
-  }
-  else {
+  } else {
     return (<View/>)
-  }}
+  }
 }
-
+}
 
 const styles = StyleSheet.create({
   wrapper: {
   },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB',
+  home: {
+    overflow: 'visible',
+    backgroundColor: 'transparent',
+
   },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5',
+  hometext: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: 'transparent',
+    fontFamily: 'Helvetica',
+    textAlign: 'center'
   },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9',
+  logo: {
+    fontSize: 38,
+    color: 'white',
+    backgroundColor: 'transparent',
+    fontFamily: 'Pacifico-Regular',
+    fontWeight: 'bold'
   },
-  text: {
-    color: '#fff',
-    fontSize: 30,
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imagecontainer: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  backgroundimage: {
+    flex: 1,
+    resizeMode: 'stretch',
+    width: '100%',
+    justifyContent: 'center',
+    padding: 10,
   }
 })
 
-export default HomeScreen
+export default HomeScreen;
