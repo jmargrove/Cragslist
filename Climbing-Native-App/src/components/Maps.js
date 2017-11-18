@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { StackNavigator } from 'react-navigation';
 import Modal from 'react-native-modal';
 import { ImagePicker } from 'expo';
+import { Font } from 'expo';
 
 var markers = [
   {
@@ -25,12 +26,12 @@ class Maps extends React.Component {
     this.state = {
       text: 'Climb where?',
       coordinate: {latitude: 41.390205, longitude: 2.154007 },
-      image: {uri: null},
       modalVisible: false,
       newLocation: {
         name: 'location...',
-        description: 'discription...'
-    }
+        description: 'description...',
+        image: {uri: null},
+      }
     };
   }
 
@@ -39,7 +40,7 @@ class Maps extends React.Component {
     });
     console.log(result);
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({newLocation: { image: result.uri }});
     }
   };
 
@@ -61,6 +62,10 @@ class Maps extends React.Component {
         }
       })
     })
+
+    Font.loadAsync({
+      'NotoSans-Regular': require('./../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
+    });
   }
 
   static navigationOptions = {
@@ -132,17 +137,17 @@ class Maps extends React.Component {
                   </View>
                   <View style={styles.nameBox}>
                     <TextInput
-                      onChangeText={(text) => this.setState({locationName: {name: text}})}
-                      value={this.state.locationName.name}
+                      onChangeText={(text) => this.setState({newLocation: {name: text}})}
+                      value={this.state.newLocation.name}
                       style={styles.name}/>
                   </View>
                   <View style={styles.descriptionBox}>
                     <TextInput
                       multiline={true}
                       numberOfLines={4}
-                      onChangeText={(text) => this.setState({locationName: {name: text}})}
-                      value={this.state.locationName.name}
-                      style={styles.discription}/>
+                      onChangeText={(text) => this.setState({newLocation: {description: text}})}
+                      value={this.state.newLocation.description}
+                      style={styles.description}/>
                   </View>
                   <View style={styles.imageSaveBox}></View>
                   {/* <Text style={styles.backfrom}> ADD NEW LOCATION </Text>
@@ -187,6 +192,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
+    fontFamily: 'NotoSans-Regular',
     fontSize: 20,
     backgroundColor: 'yellow',
   },
@@ -205,7 +211,7 @@ const styles = StyleSheet.create({
     flex: 6,
     backgroundColor: 'blue',
   },
-  discription: {
+  description: {
     flex: 1.5,
     fontSize: 20,
     backgroundColor: 'white',
