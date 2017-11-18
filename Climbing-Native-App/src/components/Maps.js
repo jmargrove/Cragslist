@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { StackNavigator } from 'react-navigation';
 import Modal from 'react-native-modal';
 import { ImagePicker } from 'expo';
-import { Font } from 'expo';
+
 
 var markers = [
   {
@@ -60,10 +60,6 @@ class Maps extends React.Component {
         }
       })
     })
-
-    Font.loadAsync({
-      'Pacifico-Regular': require('./../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
-    });
   }
 
   static navigationOptions = {
@@ -147,33 +143,28 @@ class Maps extends React.Component {
                       value={this.state.newLocation.description}
                       style={styles.description}/>
                   </View>
-                  <View style={styles.imageSaveBox}></View>
-                  {/* <Text style={styles.backfrom}> ADD NEW LOCATION </Text>
-                  <TextInput style={styles.locationName}/>
-                  <Text style={styles.backfrom}> DESCRIPTION </Text>
-                  <TextInput
-                    multiline = {true}
-                    numberOfLines = {4}
-                    style={styles.locatinDescription}
-                  />
-                  <View style={styles.photoBox}>
-                    <TouchableOpacity onPress={e => this._pickImage()}>
-                      <View style={styles.photoButton}>
-                        <Text style={styles.textForButton}>add photo</Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={e => this._takeImage()}>
-                      <View style={styles.photoButton}>
-                        <Text style={styles.textForButton}>take photo</Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity >
-                      <View style={styles.photoButton}>
-                        <Text style={styles.textForButton}>save</Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View> */}
-              </View>
+                  <View style={styles.imageBox}>
+                    <View style={styles.buttonbox}>
+                      <TouchableOpacity onPress={this._pickImage}>
+                        <View style={styles.buttons}>
+                          <Text style={styles.buttonText}>load photo</Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                    <View style={styles.buttonbox}>
+                      <TouchableOpacity onPress={this._takeImage}>
+                        <View style={styles.buttons}>
+                          <Text style={styles.buttonText}>take photo</Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View style={styles.savebox}>
+                    <View style={styles.savebuttons}>
+                      <Text style={styles.savebuttonText}>save new location</Text>
+                    </View>
+                  </View>
+                </View>
             </TouchableOpacity>
           </Modal>
       </View>
@@ -183,6 +174,18 @@ class Maps extends React.Component {
 
 
 const styles = StyleSheet.create({
+  savebuttons:{
+    backgroundColor: "purple"
+  },
+  savebuttonText:{
+    fontSize: 22,
+  },
+  savebox:{
+    flex: 1.5,
+    backgroundColor: 'pink',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   titleBox:{
     flex: 2,
     backgroundColor: 'green',
@@ -190,7 +193,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontFamily: 'Pacifico-Regular',
     fontSize: 20,
     backgroundColor: 'yellow',
   },
@@ -217,9 +219,23 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginRight: 25,
   },
-  imageSaveBox:{
+  imageBox:{
     flex: 3,
     backgroundColor: 'pink',
+    flexDirection: 'row',
+  },
+  buttonbox:{
+    flex:1,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttons:{
+    backgroundColor: 'orange',
+
+  },
+  buttonText: {
+    fontSize: 20,
   },
   addNewLocationBox: {
     backgroundColor: 'orange',
@@ -229,55 +245,12 @@ const styles = StyleSheet.create({
   },
   modelbody:{
     flex: 1,
-    backgroundColor: 'purple',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
 ////////////// below maybe shite
-  backfrom:{
-    fontSize: 20,
-    textAlign: 'center',
-  },
-  textForButton:{
-    fontSize: 18,
-  },
-  photoButton: {
-    backgroundColor: 'green',
-    width: 100,
-    alignItems: 'center',
-  },
-  locatinDescription: {
-    flex: 1.5,
-    fontSize: 20,
-    backgroundColor: 'white',
-    margin: 10,
-
-  },
-  photoBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flex: 0.5
-  },
-  locationName:{
-    fontSize: 20,
-    backgroundColor: 'white',
-    borderStyle: 'solid',
-    borderColor: 'black',
-    margin: 5,
-  },
-  back: {
-    flex: 0.5,
-    marginBottom: 30,
-    backgroundColor: "orange",
-  },
-
   modal: {
-    backgroundColor: 'blue',
+    backgroundColor: 'transparent',
     flexDirection: 'column',
-    margin: 0,
-  },
-  button: {
-    fontSize: 15,
     margin: 0,
   },
   addNewCragButton: {
