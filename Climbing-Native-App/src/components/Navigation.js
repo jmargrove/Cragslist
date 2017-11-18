@@ -6,7 +6,7 @@ import HomeScreen from './HomeScreen';
 import Maps from './Maps';
 import Login from '../containers/Login'
 import CameraComp from './CameraComp.js'
-
+import addLocation from './AddLocation.js'
 
 export const Navigation = TabNavigator({
   Home: {
@@ -48,21 +48,22 @@ export const Navigation = TabNavigator({
       ),
     },
   },
-  CameraComp: {
-    screen: CameraComp,
-    navigationOptions: {
-      tabBarLabel: 'Camera',
-      tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? 'ios-camera' : 'ios-camera-outline'}
-          size={27}
-          style={{ color: tintColor }}
-        />
-      ),
-    },
+  // CameraComp: {
+  //   screen: CameraComp,
+  //   navigationOptions: {
+  //     tabBarLabel: 'Camera',
+  //     tabBarIcon: ({ tintColor, focused }) => (
+  //       <Ionicons
+  //         name={focused ? 'ios-camera' : 'ios-camera-outline'}
+  //         size={27}
+  //         style={{ color: tintColor }}
+  //       />
+  //     ),
+  //   },
+  // },
+  addNewCrag: {
+    screen: addLocation
   }
-
-
 });
 
 export default Navigation;

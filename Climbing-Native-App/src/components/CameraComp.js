@@ -25,9 +25,7 @@ export default class CameraComp extends React.Component {
     }
   };
   //
-  componentShouldUpdate(){
-    this._takeImage()
-  }
+
 
   render() {
     let { image } = this.state;
@@ -35,7 +33,7 @@ export default class CameraComp extends React.Component {
     return (
 
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-{/* 
+{/*
       <Button
         title="take a photo"
         onPress={this._takeImage}

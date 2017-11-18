@@ -1,10 +1,11 @@
 import React from 'react';
-import { TextInput, StyleSheet, Text, View, Image, Button } from 'react-native';
+import { TouchableHighlight, TouchableOpacity, TextInput, StyleSheet, Text, View, Image, Button } from 'react-native';
 import { Navigator, NativeModules } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { StackNavigator } from 'react-navigation';
-
+import Modal from 'react-native-modal';
+import { ImagePicker } from 'expo';
 
 var markers = [
   {
@@ -24,8 +25,30 @@ class Maps extends React.Component {
     this.state = {
       text: 'Climb where?',
       coordinate: {latitude: 41.390205, longitude: 2.154007 },
-      image: {uri: null}
+      image: {uri: null},
+      modalVisible: false,
+      newLocation: {
+        name: 'location...',
+        description: 'discription...'
+    }
     };
+  }
+
+  _takeImage = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+    });
+    console.log(result);
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+
+  _pickImage = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+  })};
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
 
   componentDidMount(){
@@ -73,59 +96,218 @@ class Maps extends React.Component {
 
   render () {
     const { navigate } = this.props.navigation;
+
+
+
     return (
       <View style={styles.container}>
         <View style={styles.header}/>
-        {/* <View style={styles.searchBox}/> */}
-        {this.mapLoad(navigate)}
+        <View style={styles.addNewCragBox}>
+          <View style={styles.addNewCragButton}>
+            <TouchableOpacity
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible)
+              }}>
+                <Text style={styles.button}> ADD NEW LOCATION </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+          {this.mapLoad(navigate)}
+          <Modal
+            animationInTiming={5000}
+            animationOutTiming={5000}
+            style={styles.modal}
+            animationType="slide"
+            // transparent={false}
+            visible={this.state.modalVisible}
+            backdropOpacity={0.5}
+          >
+            <TouchableOpacity style={styles.modelbody}
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible)
+              }}>
+                <View style={styles.addNewLocationBox}>
+                  <View style={styles.titleBox}>
+                    <Text style={styles.title}> ADD NEW LOCATION </Text>
+                  </View>
+                  <View style={styles.nameBox}>
+                    <TextInput
+                      onChangeText={(text) => this.setState({locationName: {name: text}})}
+                      value={this.state.locationName.name}
+                      style={styles.name}/>
+                  </View>
+                  <View style={styles.descriptionBox}>
+                    <TextInput
+                      multiline={true}
+                      numberOfLines={4}
+                      onChangeText={(text) => this.setState({locationName: {name: text}})}
+                      value={this.state.locationName.name}
+                      style={styles.discription}/>
+                  </View>
+                  <View style={styles.imageSaveBox}></View>
+                  {/* <Text style={styles.backfrom}> ADD NEW LOCATION </Text>
+                  <TextInput style={styles.locationName}/>
+                  <Text style={styles.backfrom}> DESCRIPTION </Text>
+                  <TextInput
+                    multiline = {true}
+                    numberOfLines = {4}
+                    style={styles.locatinDescription}
+                  />
+                  <View style={styles.photoBox}>
+                    <TouchableOpacity onPress={e => this._pickImage()}>
+                      <View style={styles.photoButton}>
+                        <Text style={styles.textForButton}>add photo</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={e => this._takeImage()}>
+                      <View style={styles.photoButton}>
+                        <Text style={styles.textForButton}>take photo</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity >
+                      <View style={styles.photoButton}>
+                        <Text style={styles.textForButton}>save</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View> */}
+              </View>
+            </TouchableOpacity>
+          </Modal>
       </View>
     )
   }
 }
 
 
-
-
-
 const styles = StyleSheet.create({
+  titleBox:{
+    flex: 2,
+    backgroundColor: 'green',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 20,
+    backgroundColor: 'yellow',
+  },
+  nameBox:{
+    flex: 2,
+    justifyContent: 'center',
+  },
+  name:{
+    fontSize: 20,
+    backgroundColor: 'white',
+    margin: 5,
+    marginLeft: 30,
+    marginRight: 30,
+  },
+  descriptionBox:{
+    flex: 6,
+    backgroundColor: 'blue',
+  },
+  discription: {
+    flex: 1.5,
+    fontSize: 20,
+    backgroundColor: 'white',
+    margin: 10,
+    marginLeft: 25,
+    marginRight: 25,
+  },
+  imageSaveBox:{
+    flex: 3,
+    backgroundColor: 'pink',
+  },
+  addNewLocationBox: {
+    backgroundColor: 'orange',
+    flex: 1/2,
+    marginTop: 80,
+    margin: 30,
+  },
+  modelbody:{
+    flex: 1,
+    backgroundColor: 'purple',
+    flexDirection: 'column'
+  },
+////////////// below maybe shite
+  backfrom:{
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  textForButton:{
+    fontSize: 18,
+  },
+  photoButton: {
+    backgroundColor: 'green',
+    width: 100,
+    alignItems: 'center',
+  },
+  locatinDescription: {
+    flex: 1.5,
+    fontSize: 20,
+    backgroundColor: 'white',
+    margin: 10,
+
+  },
+  photoBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flex: 0.5
+  },
+  locationName:{
+    fontSize: 20,
+    backgroundColor: 'white',
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: 5,
+  },
+  back: {
+    flex: 0.5,
+    marginBottom: 30,
+    backgroundColor: "orange",
+  },
+
+  modal: {
+    backgroundColor: 'blue',
+    flexDirection: 'column',
+    margin: 0,
+  },
+  button: {
+    fontSize: 15,
+    margin: 0,
+  },
+  addNewCragButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'yellow',
+    flex: .5,
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  addNewCragBox: {
+    flex: 5,
+    backgroundColor: 'grey',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   marker: {
     width: 20,
     height: 20,
     borderRadius: 20/2,
     backgroundColor: 'purple',
   },
-  takePhoto: {
-    flex: 0.5,
-    margin: 3,
-    backgroundColor: 'red',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  seePhoto: {
-    flex: 0.5,
-    margin: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'yellow',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  searchBox: {
-    flex: 7,
-    backgroundColor: 'grey',
-    flexDirection: 'row',
-  },
+
   header: {
-    flex: 3,
-    backgroundColor: 'white',
+    flex: 7,
+    backgroundColor: 'transparent',
   },
   map: {
-    flex: 90,
+    flex: 88,
   },
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'orange',
+    backgroundColor: 'transparent',
   },
 });
 
