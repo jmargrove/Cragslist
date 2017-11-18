@@ -3,34 +3,44 @@ import { Text, StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Welcome from './Welcome';
 import Intro from './Intro';
-import {Font} from 'expo';
+import { Font } from 'expo';
 
 
 
 
-export default class HomeScreen extends React.Component {
-   componentDidMount() {
-     Font.loadAsync({
-      // 'satisfy': require('../../assets/Fonts/Satisfy-Regular.ttf'),
+class HomeScreen extends React.Component {
+
+  state = {
+    fontLoaded: false,
+  };
+
+  async componentWillMount(){
+    await Font.loadAsync({
+      'Pacifico-Regular': require('./../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
     });
+    this.setState({fontLoaded: true})
   }
+
   render() {
+    if(this.state.fontLoaded){
     return (
       <Swiper style={styles.wrapper} showsButtons={true}>
         {/* <View style={styles.slide1}> */}
         <Welcome />
         <Intro />
-        <Text color={'black'} fontFamily={'pacifico'}>Hello</Text>
         {/* </View> */}
         <View style={styles.slide2}>
           <Text style={styles.text}>Beautiful</Text>
         </View>
         <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
+          <Text style={{fontFamily:'Pacifico-Regular'}}>And simple</Text>
         </View>
       </Swiper>
     )
   }
+  else {
+    return (<View/>)
+  }}
 }
 
 
@@ -58,6 +68,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 30,
-    // fontFamily: 'satisfy',
   }
 })
+
+export default HomeScreen
