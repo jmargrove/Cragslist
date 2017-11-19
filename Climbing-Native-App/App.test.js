@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-
+import { combineReducers } from "redux"
 import renderer from 'react-test-renderer';
 
 it('renders without crashing', () => {

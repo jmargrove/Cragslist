@@ -1,5 +1,4 @@
 import React, { Component }  from 'react';
-import connect from 'react-redux';
 import { TouchableHighlight, TouchableOpacity, TextInput, StyleSheet, Text, View, Image, Button } from 'react-native';
 import { Navigator, NativeModules } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -8,15 +7,17 @@ import { StackNavigator } from 'react-navigation';
 import Modal from 'react-native-modal';
 import { ImagePicker } from 'expo';
 import { addToCragList } from './../../action.js'
+import { connect } from 'react-redux';
 
 //
-// const mapDispatchToProps = (dispatch) => ({
-//   addToCragList: (e) => dispatch(addToCragList(e))
-// })
+const mapDispatchToProps = (dispatch) => ({
+  addLoc: (e) => dispatch(addToCragList(e))
+})
 //
-// const mapStateToProps = (state) => ({
-//   locations: state.locations
-// })
+const mapStateToProps = (state) => ({
+  locations: state.locations,
+  newLocation: state.newLocation,
+})
 
 
 class Maps extends React.Component {
@@ -25,25 +26,23 @@ class Maps extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
-      newLocation: {
-        name: 'location...',
-        description: 'description...',
-        image: {uri: null},
-        coordinate: {latitude: 41.390205, longitude: 2.154007 },
-      }
+      name: 'location...',
+      description: 'description...',
+      image: {uri: null},
+      coordinate: {latitude: 41.390205, longitude: 2.154007 },
     };
   }
 
   _takeImage = async () => {
     let result = await ImagePicker.launchCameraAsync({});
     if (!result.cancelled) {
-      this.setState({newLocation: { image: result.uri }});
+      this.setState({ image: result.uri });
     }
   };
 
   _pickImage = async () => {
   let result = await ImagePicker.launchImageLibraryAsync({})
-  this.setState({newLocation: { image: result.uri }});
+  this.setState({ image: result.uri });
   };
 
   setModalVisible(visible) {
@@ -52,41 +51,46 @@ class Maps extends React.Component {
 
   componentDidMount(){
     navigator.geolocation.getCurrentPosition( (position) => {
-      console.log(position)
       this.setState({
-        newLocation: {
-          coordinate: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+        coordinate: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
           }
-        }
+        })
       })
-    })
-  }
+    }
 
   static navigationOptions = {
     title: 'Welcome',
   };
 
-  mapLoad(){
+  mapLoad(theProps){
     return(<MapView
       onPress={e => {
-        console.log(e.nativeEvent)
-        this.setState({newLocation: {coordinate: e.nativeEvent.coordinate}})}}
-      // provider={"google"}
+        this.setState({coordinate: e.nativeEvent.coordinate});
+        }
+      }
+      provider={"google"}
       style={styles.map}
       showsUserLocation={true}
       showsMyLocationButton={true}
       region={{
-        latitude: this.state.newLocation.coordinate.latitude,
-        longitude: this.state.newLocation.coordinate.longitude,
+        latitude: this.state.coordinate.latitude,
+        longitude: this.state.coordinate.longitude,
         latitudeDelta: 0.0462,
         longitudeDelta: 0.0221,
       }}>
       <MapView.Marker
-        coordinate={this.state.newLocation.coordinate}>
-          <View style={styles.marker}></View>
-        </MapView.Marker>
+        coordinate={this.state.coordinate}>
+        <View style={styles.marker}></View>
+      </MapView.Marker>
+      {theProps.locations.map(marker => (
+        <MapView.Marker
+          key={Math.random()}
+          pinColor={'blue'}
+          coordinate={marker.coordinate}
+        />
+      ))}
     </MapView>)
   }
 
@@ -94,6 +98,7 @@ class Maps extends React.Component {
 
 
   render () {
+    console.log(this.state)
     return (
       <View style={styles.container}>
         <View style={styles.header}/>
@@ -107,13 +112,12 @@ class Maps extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-          {this.mapLoad()}
+          {this.mapLoad(this.props)}
           <Modal
             animationInTiming={5000}
             animationOutTiming={5000}
             style={styles.modal}
             animationType="slide"
-            // transparent={false}
             visible={this.state.modalVisible}
             backdropOpacity={0.5}
           >
@@ -127,16 +131,18 @@ class Maps extends React.Component {
                   </View>
                   <View style={styles.nameBox}>
                     <TextInput
-                      onChangeText={(text) => this.setState({newLocation: {name: text}})}
-                      value={this.state.newLocation.name}
+                      onPress={(text) => this.setState({name: ''})}
+                      onChangeText={(text) => this.setState({name: text})}
+                      value={this.state.name}
                       style={styles.name}/>
                   </View>
                   <View style={styles.descriptionBox}>
                     <TextInput
                       multiline={true}
                       numberOfLines={4}
-                      onChangeText={(text) => this.setState({newLocation: {description: text}})}
-                      value={this.state.newLocation.description}
+                      onPress={(text) => this.setState({description: ''})}
+                      onChangeText={(text) => this.setState({description: text})}
+                      value={this.state.description}
                       style={styles.description}/>
                   </View>
                   <View style={styles.imageBox}>
@@ -155,10 +161,20 @@ class Maps extends React.Component {
                       </TouchableOpacity>
                     </View>
                   </View>
-                  <View style={styles.savebox}>
-                    <View style={styles.savebuttons}>
-                      <Text style={styles.savebuttonText}>save new location</Text>
-                    </View>
+                    <View style={styles.savebox}>
+                    <TouchableOpacity onPress={() =>
+                      {
+                      this.setModalVisible(!this.state.modalVisible)
+                      this.props.addLoc({
+                      name: this.state.name,
+                      description: this.state.description,
+                      image: this.state.image,
+                      coordinate: this.state.coordinate,
+                    })}}>
+                        <View style={styles.savebuttons}>
+                          <Text style={styles.savebuttonText}>save new location</Text>
+                        </View>
+                    </TouchableOpacity>
                   </View>
                 </View>
             </TouchableOpacity>
@@ -178,7 +194,7 @@ const styles = StyleSheet.create({
   },
   savebox:{
     flex: 1.5,
-    backgroundColor: 'pink',
+    backgroundColor: 'yellow',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -235,13 +251,15 @@ const styles = StyleSheet.create({
   },
   addNewLocationBox: {
     backgroundColor: 'orange',
-    flex: 1/2,
+    flex: 0.5,
     marginTop: 80,
     margin: 30,
+    borderWidth: 0.5,
   },
   modelbody:{
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: 'rgba(0,0,255,0.5)',
   },
 ////////////// below maybe shite
   modal: {
@@ -258,7 +276,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   addNewCragBox: {
-    flex: 5,
+    flex: 7,
     backgroundColor: 'grey',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -271,11 +289,11 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    flex: 7,
-    backgroundColor: 'transparent',
+    flex: 3,
+    backgroundColor: 'orange',
   },
   map: {
-    flex: 88,
+    flex: 97,
   },
   container: {
     flex: 1,
@@ -285,5 +303,5 @@ const styles = StyleSheet.create({
 });
 
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Maps);
-export default (Maps);
+export default connect(mapStateToProps, mapDispatchToProps)(Maps);
+// export default (Maps);
