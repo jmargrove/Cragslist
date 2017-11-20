@@ -122,9 +122,32 @@ class Maps extends React.Component {
     }
 
   ifImage(theProps){
-    console.log('this if image , ', theProps.locationToView.image)
     return (<Image source={{uri: theProps.locationToView.image}}
     style={{ resizeMode: 'cover', flex: 1 }}/>)
+  }
+
+  ifInfo(theProps){
+    console.log('the props that are usefull', theProps)
+    return(
+      <View style={{flex: 1}}>
+        <View style={{flex: 1, justifyContent: 'space-around', flexDirection: 'row', backgroundColor: 'red'}}>
+          <Text style={{fontSize: 20, fontFamily: 'Arial', fontStyle: 'italic'}}>lat:{Math.round(theProps.locationToView.coordinate.latitude*100)/100}°</Text>
+          <Text style={{fontSize: 20, fontFamily: 'Arial', fontStyle: 'italic'}}>lng:{Math.round(theProps.locationToView.coordinate.longitude*100)/100}°</Text>
+        </View>
+        <View style={{flex: 1, backgroundColor: 'blue'}}>
+          {/* <Text>{theProps.locationToView.name}</Text> */}
+        </View>
+        <View style={{flex: 1, backgroundColor: 'green', justifyContent: 'space-around', flexDirection: 'row'}}>
+          <View>
+            <Text>N: 57</Text>
+          </View>
+          <View> </View>
+        </View>
+        <View style={{flex: 3, backgroundColor: 'yellow'}}>
+
+        </View>
+      </View>
+    )
   }
 
   viewLocation(theProps){
@@ -145,7 +168,9 @@ class Maps extends React.Component {
             <View style={styles.imagePartition1}>
                 {this.ifImage(theProps)}
             </View>
-            <View style={styles.imagePartition2}></View>
+            <View style={styles.imagePartition2}>
+              {this.ifInfo(theProps)}
+            </View>
           </View>
         </TouchableOpacity>
       </Modal>
@@ -155,7 +180,6 @@ class Maps extends React.Component {
 
 
   render () {
-    console.log("the locations image", this.props.locationToView.image)
     return (
       <View style={styles.container}>
         <View style={styles.header}/>
