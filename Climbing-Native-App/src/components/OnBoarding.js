@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image } from 'react-native';
+import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Font } from 'expo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-class HomeScreen extends React.Component {
+
+class OnBoarding extends React.Component {
 
   state = {
     fontLoaded: false,
@@ -17,10 +19,14 @@ class HomeScreen extends React.Component {
     this.setState({fontLoaded: true})
   }
 
+  onStart = ()=> {
+    this.props.navigation.navigate('App')
+  }
+
 render() {
   if (this.state.fontLoaded) {
     return (
-      <Swiper style={styles.wrapper} showsButtons={true} buttonColor={'white'} dotColor={'white'} activeDotColor={'pink'} autoplay={true}>
+      <Swiper style={styles.wrapper} showsButtons={false} dotColor={'#8c8c8c'} activeDotColor={'white'} autoplay={false}>
         <View style={styles.container}>
           <View style={styles.imagecontainer}>
             <Image style={styles.backgroundimage} source={{
@@ -40,6 +46,11 @@ render() {
           </View>
           <View style={styles.home}>
             <Text style={styles.hometext}>Create your climber profile</Text>
+            <Ionicons
+              name={'ios-person'}
+              size={50}
+              style={{ color: 'white', marginTop: 20 }}
+            />
           </View>
         </View>
         <View style={styles.container}>
@@ -49,7 +60,12 @@ render() {
             }}/>
           </View>
           <View style={styles.home}>
-            <Text style={styles.hometext}>Mark your favorite locations</Text>
+            <Text style={styles.hometext}>Keep track of your crags climbed</Text>
+            <Ionicons
+              name={'ios-pin'}
+              size={50}
+              style={{ color: 'white', marginTop: 20 }}
+            />
           </View>
         </View>
         <View style={styles.container}>
@@ -60,6 +76,26 @@ render() {
           </View>
           <View style={styles.home}>
             <Text style={styles.hometext}>Add your dream locations</Text>
+            <Ionicons
+              name={'ios-heart'}
+              size={50}
+              style={{ color: 'white', marginTop: 20 }}
+            />
+          </View>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.imagecontainer}>
+            <Image style={styles.backgroundimage} source={{
+              uri: 'https://www.dropbox.com/s/elti0x8l994cxzu/cragslist-homescreen-01.jpg?dl=1'
+            }}/>
+          </View>
+          <View style={styles.home}>
+            <Text style={styles.hometext}>Are you ready?</Text>
+            <TouchableOpacity onPress={this.onStart}>
+              <View style={styles.buttonbody}>
+                 <Text style={styles.buttontext}>Get Started</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </Swiper>
@@ -76,6 +112,9 @@ const styles = StyleSheet.create({
   home: {
     overflow: 'visible',
     backgroundColor: 'transparent',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
 
   },
   hometext: {
@@ -112,7 +151,23 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     padding: 10,
+  },
+  buttonbody: {
+    height: 60,
+    width: 160,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    border: 'none',
+    borderRadius: 8
+  },
+  buttontext: {
+    textAlign: 'center',
+    color: '#4b3dcf',
+    fontSize: 20,
+
   }
 })
 
-export default HomeScreen;
+export default OnBoarding;
