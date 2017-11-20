@@ -1,102 +1,138 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { Navigator, NativeModules } from 'react-native';
+import { Font } from 'expo';
 
 
 
 
 class Login extends React.Component {
+  state = {
+    fontLoaded: false,
+  };
+
+  async componentWillMount(){
+    await Font.loadAsync({
+      'Pacifico-Regular': require('./../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
+    });
+    this.setState({fontLoaded: true})
+  }
 
   render () {
+    if (this.state.fontLoaded) {
     return (
       <View style={styles.container}>
-        <View style={styles.backgroundImage} source={{uri: "https://s3-eu-west-1.amazonaws.com/climbing-kd/custom/rocks.png"}}>
-          <View style={styles.boxes}>
-            <View style={styles.TitleBox}>
-              <Text style={styles.Title}>Login</Text>
+        <View style={styles.imagecontainer}>
+          <Image style={styles.backgroundimage} source={{
+            uri: 'https://www.dropbox.com/s/6zwwyqerokvjll0/cragslist-homescreen-06.jpg?dl=1'
+          }}/>
+        </View>
+        <View style={styles.home}>
+        <Text style={styles.logo}>Cragslist</Text>
+        <View style={styles.boxes}>
+          <TextInput style={styles.inputBox}/>
+          <TextInput style={styles.inputBox}/>
+        </View>
+        </View>
+        <View style={styles.buttonscontainer}>
+          <TouchableOpacity style={styles.firstbutton} onPress={e=> console.log(e)}>
+            <View style={styles.buttonbody}>
+               <Text style={styles.buttontext}>Login</Text>
             </View>
-          </View>
-          <View style={styles.boxes}>
-            <TextInput style={styles.inputBox}/>
-            <TextInput style={styles.inputBox}/>
-          </View>
-          <View style={styles.buttoncontainer}>
-            <Button
-              onPress={e=> console.log(e)}
-              title="Login"
-              style={styles.button}
-            />
-            <Button
-              onPress={e=> console.log(e)}
-              title="Signup"
-              style={styles.button}
-            />
-          </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={e=> console.log(e)}>
+            <View style={styles.buttonbody}>
+               <Text style={styles.buttontext}>Sign Up</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     )
+  } else {
+    return (<View/>)
+  }
   }
 }
 
-
 const styles = StyleSheet.create({
-  button: {
-    color: 'pink',
-    fontSize: 30,
-  },
-  // container: {
-  //   flex: 1,
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   justifyContent: 'space-around',
-  // },
-  boxes: {
+  wrapper: {},
+  home: {
+    overflow: 'visible',
     backgroundColor: 'transparent',
-    width: 300,
-    height: 100,
-    borderColor: 'lightblue',
-    justifyContent: 'space-around',
-  },
-  TitleBox: {
-    flex: 1,
+    textAlign: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent'
+    alignItems: 'center'
+
   },
-  Title: {
-    fontSize: 50,
-    color: 'darkblue'
+  hometext: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: 'transparent',
+    fontFamily: 'Helvetica',
+    textAlign: 'center'
   },
-  inputBox: {
-    borderWidth: 1,
-    borderColor: 'grey',
-    fontSize: 25,
+  logo: {
+    fontSize: 38,
+    color: 'white',
+    backgroundColor: 'transparent',
+    fontFamily: 'Pacifico-Regular',
+    fontWeight: 'bold'
   },
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   imagecontainer: {
+    backgroundColor: 'transparent',
     position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
-    height: '100%',
+    height: '100%'
   },
   backgroundimage: {
     flex: 1,
     resizeMode: 'stretch',
     width: '100%',
     justifyContent: 'center',
-    padding: 10,
-    overflow: 'visible',
-    backgroundColor: 'powderblue',
+    padding: 10
   },
-  buttoncontainer: {
-    flexDirection: 'row',
+  buttonbody: {
+    height: 60,
+    width: 140,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    border: 'none',
+    borderRadius: 8,
+  },
+  buttontext: {
+    textAlign: 'center',
+    color: '#4b3dcf',
+    fontSize: 20
+  },
+  inputBox: {
+    backgroundColor: 'white',
+    height: 37,
+    border: 'none',
+    borderRadius: 8,
+    fontSize: 18
+  },
+  boxes: {
+    backgroundColor: 'transparent',
+    width: 300,
+    height: 100,
     justifyContent: 'space-around'
-  }
+  },
+  buttonscontainer: {
+    width: 300,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+
 });
 
 
