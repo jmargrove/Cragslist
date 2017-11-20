@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
@@ -7,15 +7,17 @@ class Profile extends React.Component {
 state = {
   yourcrags: [
     {'uri': 'https://www.dropbox.com/s/ayeaxpigk4f3xf4/crags-01.jpg?dl=1', 'id': 1, },
-    {'uri': 'https://www.dropbox.com/s/ayeaxpigk4f3xf4/crags-01.jpg?dl=1', 'id': 2, },
-    {'uri': 'https://www.dropbox.com/s/ayeaxpigk4f3xf4/crags-01.jpg?dl=1', 'id': 3, },
-    {'uri': 'https://www.dropbox.com/s/ayeaxpigk4f3xf4/crags-01.jpg?dl=1', 'id': 4, },
+    {'uri': 'https://www.dropbox.com/s/ji7zagapczrvtzs/crags-02.jpg?dl=1', 'id': 2, },
+    {'uri': 'https://www.dropbox.com/s/5y5sgps2z5x3nr2/crags-03.jpg?dl=1', 'id': 3, },
+    {'uri': 'https://www.dropbox.com/s/q2veumxjvupf6o0/crags-04.jpg?dl=1', 'id': 4, },
+    {'uri': 'https://www.dropbox.com/s/0sn1hbsj3hthvrn/crags-05.jpg?dl=1', 'id': 4, },
   ],
   dreamcrags: [
     {'uri': 'https://www.dropbox.com/s/g30yqedcj2f3hnw/dreamcrag-01-smallsize.jpg?dl=1', 'id': 1, 'name': 'Yosemite'},
-    {'uri': 'https://www.dropbox.com/s/g30yqedcj2f3hnw/dreamcrag-01-smallsize.jpg?dl=1', 'id': 2, 'name': 'Yosemite' },
-    {'uri': 'https://www.dropbox.com/s/g30yqedcj2f3hnw/dreamcrag-01-smallsize.jpg?dl=1', 'id': 3, 'name': 'Yosemite'},
-    {'uri': 'https://www.dropbox.com/s/g30yqedcj2f3hnw/dreamcrag-01-smallsize.jpg?dl=1', 'id': 4, 'name': 'Yosemite'},
+    {'uri': 'https://www.dropbox.com/s/1ylk60rmlu2j173/dreamcrag-03.jpg?dl=1', 'id': 2, 'name': 'Yosemite' },
+    {'uri': 'https://www.dropbox.com/s/e9tpj7lvino4z1f/dreamcrag-02.jpg?dl=1', 'id': 3, 'name': 'Yosemite'},
+    {'uri': 'https://www.dropbox.com/s/vzp6g86ckprgbhu/dreamcrag-04.jpg?dl=1', 'id': 4, 'name': 'Yosemite'},
+    {'uri': 'https://www.dropbox.com/s/soqgmvzzpw3sg7m/dreamcrag-05.jpg?dl=1', 'id': 4, 'name': 'Yosemite'},
   ]
 }
 render() {
@@ -71,6 +73,7 @@ return (
 
       </ScrollView>
     </View>
+
     <View style={styles.wishdiv} >
       <Text style={styles.h1}>Your Dream Destinations</Text>
       <ScrollView style={styles.list} horizontal={true} scrollEnabled={true} >
