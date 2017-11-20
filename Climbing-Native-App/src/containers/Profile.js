@@ -109,6 +109,8 @@ const styles = StyleSheet.create({
   },
   imagediv: {
     flex: 1,
+    width: 120,
+    height: 120,
   },
   profiledata: {
     flex: 2,
