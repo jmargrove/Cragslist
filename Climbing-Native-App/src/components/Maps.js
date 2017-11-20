@@ -8,7 +8,7 @@ import Modal from 'react-native-modal';
 import { ImagePicker } from 'expo';
 import { addToCragList } from './../../action.js'
 import { connect } from 'react-redux';
-
+import randomatic from 'randomatic';
 //
 const mapDispatchToProps = (dispatch) => ({
   addLoc: (e) => dispatch(addToCragList(e))
@@ -70,10 +70,11 @@ class Maps extends React.Component {
         this.setState({coordinate: e.nativeEvent.coordinate});
         }
       }
-      provider={"google"}
+      // provider={"google"}
       style={styles.map}
       showsUserLocation={true}
       showsMyLocationButton={true}
+      onMarkerPress={e => console.log(e.nativeEvent)}
       region={{
         latitude: this.state.coordinate.latitude,
         longitude: this.state.coordinate.longitude,
@@ -87,9 +88,13 @@ class Maps extends React.Component {
       {theProps.locations.map(marker => (
         <MapView.Marker
           key={Math.random()}
+          identifier={marker.id}
           pinColor={'blue'}
-          coordinate={marker.coordinate}
-        />
+          coordinate={marker.coordinate}>
+          <View style={styles.locationPress}>
+            <View style={styles.locationMarker}></View>
+          </View>
+        </MapView.Marker>
       ))}
     </MapView>)
   }
@@ -98,7 +103,6 @@ class Maps extends React.Component {
 
 
   render () {
-    console.log(this.state)
     return (
       <View style={styles.container}>
         <View style={styles.header}/>
@@ -170,6 +174,7 @@ class Maps extends React.Component {
                       description: this.state.description,
                       image: this.state.image,
                       coordinate: this.state.coordinate,
+                      identifier: randomatic('*',15),
                     })}}>
                         <View style={styles.savebuttons}>
                           <Text style={styles.savebuttonText}>save new location</Text>
@@ -186,6 +191,20 @@ class Maps extends React.Component {
 
 
 const styles = StyleSheet.create({
+  locationPress: {
+    height: 40,
+    width: 40,
+    borderRadius: 40/2,
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  locationMarker: {
+    height: 20,
+    width: 20,
+    borderRadius: 20/2,
+    backgroundColor: 'yellow',
+  },
   savebuttons:{
     backgroundColor: "purple"
   },

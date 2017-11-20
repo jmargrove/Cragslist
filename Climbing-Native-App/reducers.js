@@ -5,6 +5,7 @@ const defaultState = {
       description: 'description...',
       image: {uri: null},
       coordinate: {latitude: 41.390205, longitude: 2.154007 },
+      id: 'jhdbacbebakhcelbrw',
     }
     ,
     {
@@ -12,6 +13,7 @@ const defaultState = {
       description: 'description...',
       image: {uri: null},
       coordinate: {latitude: 41.0, longitude: 2.0 },
+      id: 'chjlblajberubaflce',
     }
     ,
     {
@@ -19,14 +21,9 @@ const defaultState = {
       description: 'description...',
       image: {uri: null},
       coordinate: {latitude: 41.5, longitude: 2.2 },
+      id: 'djshbachjebrlajdldacl21341',
     }
-  ],
-  newLocation: {
-    name: 'location...',
-    description: 'description...',
-    image: {uri: null},
-    coordinate: {latitude: 41.390205, longitude: 2.154007 },
-  }
+  ]
 }
 
 
