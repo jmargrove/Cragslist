@@ -10,14 +10,14 @@ state = {
     {'uri': 'https://www.dropbox.com/s/ji7zagapczrvtzs/crags-02.jpg?dl=1', 'id': 2, },
     {'uri': 'https://www.dropbox.com/s/5y5sgps2z5x3nr2/crags-03.jpg?dl=1', 'id': 3, },
     {'uri': 'https://www.dropbox.com/s/q2veumxjvupf6o0/crags-04.jpg?dl=1', 'id': 4, },
-    {'uri': 'https://www.dropbox.com/s/0sn1hbsj3hthvrn/crags-05.jpg?dl=1', 'id': 4, },
+    {'uri': 'https://www.dropbox.com/s/0sn1hbsj3hthvrn/crags-05.jpg?dl=1', 'id': 5, },
   ],
   dreamcrags: [
     {'uri': 'https://www.dropbox.com/s/g30yqedcj2f3hnw/dreamcrag-01-smallsize.jpg?dl=1', 'id': 1, 'name': 'Yosemite'},
     {'uri': 'https://www.dropbox.com/s/1ylk60rmlu2j173/dreamcrag-03.jpg?dl=1', 'id': 2, 'name': 'Yosemite' },
     {'uri': 'https://www.dropbox.com/s/e9tpj7lvino4z1f/dreamcrag-02.jpg?dl=1', 'id': 3, 'name': 'Yosemite'},
     {'uri': 'https://www.dropbox.com/s/vzp6g86ckprgbhu/dreamcrag-04.jpg?dl=1', 'id': 4, 'name': 'Yosemite'},
-    {'uri': 'https://www.dropbox.com/s/soqgmvzzpw3sg7m/dreamcrag-05.jpg?dl=1', 'id': 4, 'name': 'Yosemite'},
+    {'uri': 'https://www.dropbox.com/s/soqgmvzzpw3sg7m/dreamcrag-05.jpg?dl=1', 'id': 5, 'name': 'Yosemite'},
   ]
 }
 render() {
@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
   profiledata2: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    textAlign: 'center',
     marginTop: 12,
   },
   cragsdiv: {
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   backgroundimage: {
-    resizeMode: 'contain',
     flex: 1,
   },
   backgroundimage2: {
@@ -154,9 +152,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
+  }
 });
 
 

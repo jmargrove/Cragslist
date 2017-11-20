@@ -110,9 +110,7 @@ const styles = StyleSheet.create({
   wrapper: {
   },
   home: {
-    overflow: 'visible',
     backgroundColor: 'transparent',
-    textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center'
 
@@ -123,7 +121,6 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: 'transparent',
     fontFamily: 'Helvetica',
-    textAlign: 'center'
   },
   logo: {
     fontSize: 38,
@@ -159,11 +156,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    // border: 'none',
     borderRadius: 8
   },
   buttontext: {
-    textAlign: 'center',
     color: '#4b3dcf',
     fontSize: 20,
 
