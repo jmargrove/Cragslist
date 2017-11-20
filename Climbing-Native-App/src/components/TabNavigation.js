@@ -2,26 +2,13 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeScreen from './HomeScreen';
 import Maps from './Maps';
 import Login from '../containers/Login'
 import CameraComp from './CameraComp.js'
 import addLocation from './AddLocation.js'
 
-export const Navigation = TabNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? 'ios-home' : 'ios-home-outline'}
-          size={27}
-          style={{ color: tintColor }}
-        />
-      ),
-    },
-  },
+export const TabNavigation = TabNavigator({
+  //if not logged in:
   Login: {
     screen: Login,
     navigationOptions: {
@@ -41,7 +28,7 @@ export const Navigation = TabNavigator({
       tabBarLabel: 'Map',
       tabBarIcon: ({ tintColor, focused }) => (
         <Ionicons
-          name={focused ? 'ios-locate' : 'ios-locate-outline'}
+          name={focused ? 'ios-map' : 'ios-map-outline'}
           size={27}
           style={{ color: tintColor }}
         />
@@ -62,8 +49,18 @@ export const Navigation = TabNavigator({
   //   },
   // },
   addNewCrag: {
-    screen: addLocation
+    screen: addLocation,
+    navigationOptions: {
+      tabBarLabel: 'Add Location',
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Ionicons
+          name={focused ? 'ios-pin' : 'ios-pin-outline'}
+          size={27}
+          style={{ color: tintColor }}
+        />
+      ),
+    },
   }
 });
 
-export default Navigation;
+export default TabNavigation;
