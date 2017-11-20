@@ -128,11 +128,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   buttonscontainer: {
+    width: 300,
     flexDirection: 'row',
+    justifyContent: 'space-between'
   },
-  firstbutton: {
-    marginRight: 10,
-  }
+
 });
 
 
