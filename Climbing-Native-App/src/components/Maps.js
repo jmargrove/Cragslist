@@ -134,15 +134,15 @@ class Maps extends React.Component {
           <Text style={{fontSize: 20, fontFamily: 'Arial', fontStyle: 'italic'}}>lat:{Math.round(theProps.locationToView.coordinate.latitude*100)/100}°</Text>
           <Text style={{fontSize: 20, fontFamily: 'Arial', fontStyle: 'italic'}}>lng:{Math.round(theProps.locationToView.coordinate.longitude*100)/100}°</Text>
         </View>
-        <View style={{flex: 1, backgroundColor: 'blue'}}>
-          {/* <Text>{theProps.locationToView.name}</Text> */}
+        {/* <View style={{flex: 1, backgroundColor: 'blue'}}>
+          <Text>{theProps.locationToView.name}</Text>
         </View>
         <View style={{flex: 1, backgroundColor: 'green', justifyContent: 'space-around', flexDirection: 'row'}}>
           <View>
             <Text>N: 57</Text>
           </View>
           <View> </View>
-        </View>
+        </View> */}
         <View style={{flex: 3, backgroundColor: 'yellow'}}>
 
         </View>
