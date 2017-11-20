@@ -4619,9 +4619,9 @@ react-native-scripts@1.7.0:
     rimraf "^2.6.1"
     xdl "46.0.1"
 
-"react-native-sketch@git://github.com/houserater/react-native-sketch.git#hank.brekke/set-sketch-image":
-  version "1.0.1"
-  resolved "git://github.com/houserater/react-native-sketch.git#d3452ceba3ed7d723e5e0088ebdb0e87cec84df7"
+react-native-sketch@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-sketch/-/react-native-sketch-1.0.3.tgz#85c855b9b6b66bf87aebd204472202b5c1603905"
   dependencies:
     prop-types "^15.5.10"
 

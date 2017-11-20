@@ -9,14 +9,18 @@ import { ImagePicker } from 'expo';
 import { addToCragList } from './../../action.js'
 import { connect } from 'react-redux';
 import randomatic from 'randomatic';
-//
+import { viewLocation } from './../../action.js'
+
 const mapDispatchToProps = (dispatch) => ({
-  addLoc: (e) => dispatch(addToCragList(e))
+  addLoc: (e) => dispatch(addToCragList(e)),
+  viewLoc: (id) => dispatch(viewLocation(id))
 })
 //
+
 const mapStateToProps = (state) => ({
   locations: state.locations,
   newLocation: state.newLocation,
+  locationToView: state.locationToView,
 })
 
 
@@ -26,10 +30,13 @@ class Maps extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
+      modalVisibleView: false,
       name: 'location...',
       description: 'description...',
-      image: {uri: null},
+      image: null,
       coordinate: {latitude: 41.390205, longitude: 2.154007 },
+      filterLocationID: null,
+      filterLocationObj: null,
     };
   }
 
@@ -47,6 +54,10 @@ class Maps extends React.Component {
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
+  }
+
+  setModalVisibleView(visible) {
+    this.setState({modalVisibleView: visible});
   }
 
   componentDidMount(){
@@ -73,8 +84,13 @@ class Maps extends React.Component {
       // provider={"google"}
       style={styles.map}
       showsUserLocation={true}
-      showsMyLocationButton={true}
-      onMarkerPress={e => console.log(e.nativeEvent)}
+      showsMyLocati
+      onButton={true}
+      onMarkerPress={e => {
+        const locObj = this.filterForID(theProps, e.nativeEvent.id)[0]
+        this.props.viewLoc(locObj);
+        this.setModalVisibleView(!this.state.modalVisibleView)
+      }}
       region={{
         latitude: this.state.coordinate.latitude,
         longitude: this.state.coordinate.longitude,
@@ -99,6 +115,67 @@ class Maps extends React.Component {
     </MapView>)
   }
 
+  filterForID(theProps, theID){
+      return (theProps.locations.filter(marks => {
+        return marks.id === theID
+      }))
+    }
+
+  ifImage(theProps){
+    return (<Image source={{uri: theProps.locationToView.image}}
+    style={{ resizeMode: 'cover', flex: 1 }}/>)
+  }
+
+  ifInfo(theProps){
+    console.log('the props that are usefull', theProps)
+    return(
+      <View style={{flex: 1}}>
+        <View style={{flex: 1, justifyContent: 'space-around', flexDirection: 'row', backgroundColor: 'red'}}>
+          <Text style={{fontSize: 20, fontFamily: 'Arial', fontStyle: 'italic'}}>lat:{Math.round(theProps.locationToView.coordinate.latitude*100)/100}°</Text>
+          <Text style={{fontSize: 20, fontFamily: 'Arial', fontStyle: 'italic'}}>lng:{Math.round(theProps.locationToView.coordinate.longitude*100)/100}°</Text>
+        </View>
+        <View style={{flex: 1, backgroundColor: 'blue'}}>
+          {/* <Text>{theProps.locationToView.name}</Text> */}
+        </View>
+        <View style={{flex: 1, backgroundColor: 'green', justifyContent: 'space-around', flexDirection: 'row'}}>
+          <View>
+            <Text>N: 57</Text>
+          </View>
+          <View> </View>
+        </View>
+        <View style={{flex: 3, backgroundColor: 'yellow'}}>
+
+        </View>
+      </View>
+    )
+  }
+
+  viewLocation(theProps){
+    return(
+      <Modal
+        animationInTiming={5000}
+        animationOutTiming={5000}
+        style={styles.modal}
+        animationType="slide"
+        visible={this.state.modalVisibleView}
+        backdropOpacity={0.5}
+      >
+        <TouchableOpacity style={styles.locationsmodelbody}
+          onPress={() => {
+            this.setModalVisibleView(!this.state.modalVisibleView)
+          }}>
+          <View style={styles.viewLocationBox}>
+            <View style={styles.imagePartition1}>
+                {this.ifImage(theProps)}
+            </View>
+            <View style={styles.imagePartition2}>
+              {this.ifInfo(theProps)}
+            </View>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+    )
+  }
 
 
 
@@ -117,6 +194,7 @@ class Maps extends React.Component {
           </View>
         </View>
           {this.mapLoad(this.props)}
+          {this.viewLocation(this.props)}
           <Modal
             animationInTiming={5000}
             animationOutTiming={5000}
@@ -174,7 +252,7 @@ class Maps extends React.Component {
                       description: this.state.description,
                       image: this.state.image,
                       coordinate: this.state.coordinate,
-                      identifier: randomatic('*',15),
+                      id: randomatic('aA0', 15),
                     })}}>
                         <View style={styles.savebuttons}>
                           <Text style={styles.savebuttonText}>save new location</Text>
@@ -191,6 +269,26 @@ class Maps extends React.Component {
 
 
 const styles = StyleSheet.create({
+  imagePartition1: {
+    flex: 4,
+    backgroundColor: 'green',
+  },
+  imagePartition2: {
+    flex: 6,
+    backgroundColor: 'red',
+  },
+  viewLocationBox: {
+    flex: 1/5,
+    backgroundColor: 'orange',
+    flexDirection: 'row',
+  },
+  locationsmodelbody:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0,0,255,0.5)',
+  },
+  /////////////////////////
   locationPress: {
     height: 40,
     width: 40,
