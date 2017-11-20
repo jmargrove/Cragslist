@@ -30,7 +30,7 @@
     "react-native-maps": "^0.17.1",
     "react-native-modal": "^4.1.1",
     "react-native-sketch": "^1.0.3",
-    "react-native-swiper": "^1.5.13",
+    "react-native-swiper": "git+https://github.com/pensierinmusica/react-native-swiper.git",
     "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.19",
     "react-redux": "^5.0.6",

@@ -106,18 +106,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    border: 'none',
+    // border: 'none',
     borderRadius: 8,
   },
   buttontext: {
-    textAlign: 'center',
+    // textAlign: 'center',
     color: '#4b3dcf',
     fontSize: 20
   },
   inputBox: {
     backgroundColor: 'white',
     height: 37,
-    border: 'none',
+    // border: 'none',
     borderRadius: 8,
     fontSize: 18
   },

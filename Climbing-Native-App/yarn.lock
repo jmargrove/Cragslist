@@ -4632,9 +4632,9 @@ react-native-svg@5.4.2:
     color "^0.11.1"
     lodash "^4.16.6"
 
-react-native-swiper@^1.5.13:
-  version "1.5.13"
-  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.13.tgz#fa695cd4ab77b9a9df2d2bfee38ea7274dd07a2e"
+"react-native-swiper@git+https://github.com/pensierinmusica/react-native-swiper.git":
+  version "1.5.12"
+  resolved "git+https://github.com/pensierinmusica/react-native-swiper.git#173275f6b2183e0e9771b478010e775570ec81e8"
   dependencies:
     prop-types "^15.5.10"
 
