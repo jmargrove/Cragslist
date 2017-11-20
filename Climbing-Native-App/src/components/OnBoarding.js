@@ -26,7 +26,7 @@ class OnBoarding extends React.Component {
 render() {
   if (this.state.fontLoaded) {
     return (
-      <Swiper style={styles.wrapper} showsButtons={false} buttonColor={'white'} dotColor={'white'} activeDotColor={'#4b3dcf'} autoplay={false}>
+      <Swiper style={styles.wrapper} showsButtons={false} dotColor={'#8c8c8c'} activeDotColor={'white'} autoplay={false}>
         <View style={styles.container}>
           <View style={styles.imagecontainer}>
             <Image style={styles.backgroundimage} source={{
