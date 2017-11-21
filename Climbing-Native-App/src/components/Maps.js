@@ -10,6 +10,10 @@ import { addToCragList } from './../../action.js'
 import { connect } from 'react-redux';
 import randomatic from 'randomatic';
 import { viewLocation } from './../../action.js'
+import uploadImageAsync from './../functions/aws.js'
+import uploadImag from './../functions/fetch.js'
+import uuid from 'uuid/v4';
+import AWS from 'aws-sdk';
 
 const mapDispatchToProps = (dispatch) => ({
   addLoc: (e) => dispatch(addToCragList(e)),
@@ -42,14 +46,25 @@ class Maps extends React.Component {
 
   _takeImage = async () => {
     let result = await ImagePicker.launchCameraAsync({});
+    sendToAWS(result)
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
   };
 
   _pickImage = async () => {
-  let result = await ImagePicker.launchImageLibraryAsync({})
-  this.setState({ image: result.uri });
+    const result = await ImagePicker.launchImageLibraryAsync({
+      base64: true
+    })
+
+    // console.log(' ');
+    // console.log('======= RESULT');
+    // console.log(Object.keys(result));
+    // console.log('=[END]= RESULT');
+    // console.log(' ');
+
+    // this.setState({ image: result.uri });
+    uploadImageAsync(result.base64);
   };
 
   setModalVisible(visible) {
@@ -69,6 +84,11 @@ class Maps extends React.Component {
           }
         })
       })
+
+
+    // uploadImageAsync('/Users/jamesmargrove/Desktop/Screen Shot 2017-11-10 at 12.14.55.png')
+    this._pickImage();
+
     }
 
   static navigationOptions = {
@@ -176,8 +196,6 @@ class Maps extends React.Component {
       </Modal>
     )
   }
-
-
 
   render () {
     return (
