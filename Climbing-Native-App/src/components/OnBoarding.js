@@ -86,7 +86,7 @@ render() {
         <View style={styles.container}>
           <View style={styles.imagecontainer}>
             <Image style={styles.backgroundimage} source={{
-              uri: 'https://www.dropbox.com/s/elti0x8l994cxzu/cragslist-homescreen-01.jpg?dl=1'
+              uri: 'https://www.dropbox.com/s/rpgig8a4m1lcidn/cragslist-homescreen-11.jpg?dl=1'
             }}/>
           </View>
           <View style={styles.home}>
