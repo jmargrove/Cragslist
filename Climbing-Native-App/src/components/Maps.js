@@ -321,12 +321,12 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  // marker: {
-  //   color: '#0076ff',
-  // },
+  marker: {
+    color: '#0076ff',
+  },
   locationMarker: {
     borderRadius: 20/2,
-    // color: '#8c8c8c',
+    color: '#8c8c8c',
   },
   modalbody:{
     flex: 1,
