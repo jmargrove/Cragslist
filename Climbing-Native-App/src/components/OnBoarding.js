@@ -5,7 +5,6 @@ import { Font } from 'expo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-
 class OnBoarding extends React.Component {
 
   state = {
@@ -91,7 +90,7 @@ render() {
           </View>
           <View style={styles.home}>
             <Text style={styles.hometext}>Are you ready?</Text>
-            <TouchableOpacity onPress={this.onStart}>
+            <TouchableOpacity onPress={this.onStart} >
               <View style={styles.buttonbody}>
                  <Text style={styles.buttontext}>Get Started</Text>
               </View>
@@ -151,18 +150,20 @@ const styles = StyleSheet.create({
   },
   buttonbody: {
     height: 60,
-    width: 160,
-    backgroundColor: 'white',
+    width: 140,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderWidth: 1,
+    borderColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    borderRadius: 8
+    borderRadius: 8,
   },
   buttontext: {
-    color: '#4b3dcf',
+    color: 'white',
+    fontWeight: 'bold',
     fontSize: 20,
-
-  }
+  },
 })
 
 export default OnBoarding;

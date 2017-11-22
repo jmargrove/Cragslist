@@ -99,21 +99,22 @@ const styles = StyleSheet.create({
   buttonbody: {
     height: 60,
     width: 140,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderWidth: 1,
+    borderColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    // border: 'none',
     borderRadius: 8,
   },
   buttontext: {
-    color: '#4b3dcf',
-    fontSize: 20
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
   inputBox: {
     backgroundColor: 'white',
     height: 37,
-    // border: 'none',
     borderRadius: 8,
     fontSize: 18
   },
