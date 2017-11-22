@@ -12,12 +12,15 @@ import randomatic from 'randomatic';
 import { viewLocation } from './../../action.js'
 import uploadImageAsync from './../functions/aws.js'
 import postToMong from './../functions/postToMong.js'
+import getDBData from './../functions/getDBData.js'
+import { onInitDBrequest } from './../../action.js'
 import uuid from 'uuid/v4';
 import AWS from 'aws-sdk';
 
 const mapDispatchToProps = (dispatch) => ({
   addLoc: (e) => dispatch(addToCragList(e)),
-  viewLoc: (id) => dispatch(viewLocation(id))
+  viewLoc: (id) => dispatch(viewLocation(id)),
+  initLoc: (obj) => dispatch(onInitDBrequest(obj)),
 })
 //
 
@@ -46,9 +49,16 @@ class Maps extends React.Component {
   }
 
   _takeImage = async () => {
-    let result = await ImagePicker.launchCameraAsync({});
-    if (!result.cancelled) {
-      this.setState({ image: result.uri });
+    let takeResult64 = await ImagePicker.launchCameraAsync({
+      base64: true
+    });
+    if (!takeResult64.cancelled) {
+      this.setState({ imageB64: takeResult64.base64 });
+    }
+
+    const takeResultUri = await ImagePicker.launchImageLibraryAsync({})
+    if (!takeResultUri.cancelled) {
+      this.setState({ imageUri: takeResultUri.uri });
     }
   };
 
@@ -85,7 +95,10 @@ class Maps extends React.Component {
         })
       })
 
-
+      getDBData()
+      .then(resp => resp.json())
+      .then(r => this.props.initLoc(r))
+       //.then(res => console.log("get request:", res)).catch(e => console.log(e))
     // uploadImageAsync('/Users/jamesmargrove/Desktop/Screen Shot 2017-11-10 at 12.14.55.png')
     // this._pickImage();
 
@@ -264,24 +277,29 @@ class Maps extends React.Component {
                     <View style={styles.savebox}>
                     <TouchableOpacity onPress={() =>
                       {
-                      const newLoc = {
-                        name: this.state.name,
-                        description: this.state.description,
-                        imageUri: this.state.imageUri,
-                        imageB64: this.state.imageB64,
-                        coordinate: this.state.coordinate,
-                        id: randomatic('aA0', 15),
-                      }
 
-                      postToMong(newLoc).then(e => console.log(e.json()))
-                      .catch(e => {console.log(e)});
-
-                      this.setModalVisible(!this.state.modalVisible)
-                      /// adding new location to the reducer for rendering
-                      this.props.addLoc(newLoc)
                       /// uploading the image to aws s3
-                      uploadImageAsync(newLoc.imageB64, newLoc.id)
-                      .then(e => console.log(e.json()))
+                      const ident = randomatic('aA0', 15)
+                      uploadImageAsync(this.state.imageB64, ident)
+                      .then(e => e.json())
+                      .then(url => {
+                        const newLoc = {
+                          name: this.state.name,
+                          description: this.state.description,
+                          imageUri: url.imageUri,
+                          doneWish: true,
+                          coordinate: this.state.coordinate,
+                          id: ident,
+                        }
+
+                        postToMong(newLoc).then(e => console.log(e.json()))
+                        .catch(e => {console.log(e)});
+
+                        this.setModalVisible(!this.state.modalVisible)
+                        /// adding new location to the reducer for rendering
+                        this.props.addLoc(newLoc)
+
+                      })
                       .catch(e => {console.log(e)});
                       /// posting the image info to mongo db
                     }}>

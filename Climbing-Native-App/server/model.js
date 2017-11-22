@@ -2,7 +2,7 @@ const uuid = require('uuid/v4');
 const AWS = require('aws-sdk');
 
 
-exports.sendToAWS = async (ctx, next) => {
+sendToAWS = async (ctx, next) => {
   ////// file names and id
   var fileName = Object.keys(ctx.request.body.fields)[0];
   var albumPhotosKey = 'climbing-app/';
@@ -13,7 +13,7 @@ exports.sendToAWS = async (ctx, next) => {
   const bucketRegion = 'eu-west-1';
   const IdentityPoolId = 'eu-west-1:2326fc41-82f5-4be7-875b-b8c11805ed3d';
 
-  AWS.config.update({
+  await AWS.config.update({
     region: bucketRegion,
     credentials: new AWS.CognitoIdentityCredentials({
       IdentityPoolId: IdentityPoolId
@@ -32,10 +32,16 @@ exports.sendToAWS = async (ctx, next) => {
     Key: photoKey,
     Body: buf,
     ContentEncoding: 'base64',
-    ContentType: 'image/jpeg'
+    ContentType: 'image/jpeg',
+    ACL: 'public-read',
   };
-
-  s3.upload(data, function(err, data){
-    console.log(data)
+  let loc;
+  return new Promise((resolve, reject) => {
+    s3.upload(data, (err, data) => {
+      if (err) reject(err);
+      resolve(data.Location);
+    });
   })
 }
+
+module.exports = sendToAWS;
