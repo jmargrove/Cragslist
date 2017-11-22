@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch) => ({
   viewLoc: (id) => dispatch(viewLocation(id)),
   initLoc: (obj) => dispatch(onInitDBrequest(obj)),
 })
-//
 
 const mapStateToProps = (state) => ({
   locations: state.locations,
@@ -132,16 +131,24 @@ class Maps extends React.Component {
       }}>
       <MapView.Marker
         coordinate={this.state.coordinate}>
-        <View style={styles.marker}></View>
+        <View style={styles.marker}><Ionicons
+          name={'ios-pin'}
+          size={50}
+          style={styles.marker}
+        /></View>
       </MapView.Marker>
       {theProps.locations.map(marker => (
         <MapView.Marker
           key={Math.random()}
           identifier={marker.id}
-          pinColor={'blue'}
           coordinate={marker.coordinate}>
           <View style={styles.locationPress}>
-            <View style={styles.locationMarker}></View>
+            <View style={styles.locationMarker}>
+              <Ionicons
+              name={'ios-ribbon'}
+              size={35}
+              style={styles.locationMarker}
+            /></View>
           </View>
         </MapView.Marker>
       ))}
@@ -163,21 +170,13 @@ class Maps extends React.Component {
     // console.log('the props that are usefull', theProps)
     return(
       <View style={{flex: 1}}>
-        <View style={{flex: 1, justifyContent: 'space-around', flexDirection: 'row', backgroundColor: 'red'}}>
-          <Text style={{fontSize: 20, fontFamily: 'Arial', fontStyle: 'italic'}}>lat:{Math.round(theProps.locationToView.coordinate.latitude*100)/100}°</Text>
-          <Text style={{fontSize: 20, fontFamily: 'Arial', fontStyle: 'italic'}}>lng:{Math.round(theProps.locationToView.coordinate.longitude*100)/100}°</Text>
+        <View style={{flex: 1, justifyContent: 'space-around', flexDirection: 'row', backgroundColor: 'white', alignItems: 'center'}}>
+          <Text style={{fontSize: 13, fontFamily: 'Helvetica' }}>lat:</Text>
+          <Text style={{fontSize: 13, fontFamily: 'Helvetica' }}>long:</Text>
         </View>
-        {/* <View style={{flex: 1, backgroundColor: 'blue'}}>
-          <Text>{theProps.locationToView.name}</Text>
-        </View>
-        <View style={{flex: 1, backgroundColor: 'green', justifyContent: 'space-around', flexDirection: 'row'}}>
-          <View>
-            <Text>N: 57</Text>
-          </View>
-          <View> </View>
-        </View> */}
-        <View style={{flex: 3, backgroundColor: 'yellow'}}>
-
+        <View style={{flex: 2, justifyContent: 'space-around', flexDirection: 'row', backgroundColor: 'white', alignItems: 'flex-start'}}>
+          <Text style={{fontSize: 30, fontFamily: 'Helvetica', fontWeight: 'normal' }}>{Math.round(theProps.locationToView.coordinate.latitude*100)/100}°</Text>
+          <Text style={{fontSize: 30, fontFamily: 'Helvetica', fontWeight: 'normal'}}>{Math.round(theProps.locationToView.coordinate.longitude*100)/100}°</Text>
         </View>
       </View>
     )
@@ -193,7 +192,7 @@ class Maps extends React.Component {
         visible={this.state.modalVisibleView}
         backdropOpacity={0.5}
       >
-        <TouchableOpacity style={styles.locationsmodelbody}
+        <TouchableOpacity style={styles.locationsmodalbody}
           onPress={() => {
             this.setModalVisibleView(!this.state.modalVisibleView)
           }}>
@@ -213,14 +212,24 @@ class Maps extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={styles.header}/>
-        <View style={styles.addNewCragBox}>
-          <View style={styles.addNewCragButton}>
+        <View style={styles.statusbar}/>
+        <View style={styles.header}>
+          <View style={styles.headerbutton}>
             <TouchableOpacity
               onPress={() => {
                 this.setModalVisible(!this.state.modalVisible)
               }}>
-                <Text style={styles.button}> ADD NEW LOCATION </Text>
+              <Ionicons
+                name={'ios-add-outline'}
+                size={35}
+                style={{color: '#0076ff', marginLeft: 5}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={{width: 105}}
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible)
+              }}>
+                <Text style={styles.addbutton}>  Add Location</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -234,13 +243,14 @@ class Maps extends React.Component {
             visible={this.state.modalVisible}
             backdropOpacity={0.5}
           >
-            <TouchableOpacity style={styles.modelbody}
+            <TouchableOpacity style={styles.modalbody}
               onPress={() => {
                 this.setModalVisible(!this.state.modalVisible)
               }}>
                 <View style={styles.addNewLocationBox}>
-                  <View style={styles.titleBox}>
-                    <Text style={styles.title}> ADD NEW LOCATION </Text>
+                  <View style={styles.statusbar}/>
+                  <View style={styles.header}>
+                    <Text style={styles.headerText}>Add New Location</Text>
                   </View>
                   <View style={styles.nameBox}>
                     <TextInput
@@ -262,19 +272,17 @@ class Maps extends React.Component {
                     <View style={styles.buttonbox}>
                       <TouchableOpacity onPress={this._pickImage}>
                         <View style={styles.buttons}>
-                          <Text style={styles.buttonText}>load photo</Text>
+                          <Ionicons name={'ios-images-outline'} size={30} style={{color: '#0076ff', marginRight: 10}} />
                         </View>
                       </TouchableOpacity>
                     </View>
                     <View style={styles.buttonbox}>
                       <TouchableOpacity onPress={this._takeImage}>
                         <View style={styles.buttons}>
-                          <Text style={styles.buttonText}>take photo</Text>
+                          <Ionicons name={'ios-camera-outline'} size={35} style={{color: '#0076ff', marginRight: 10}} />
                         </View>
                       </TouchableOpacity>
                     </View>
-                  </View>
-                    <View style={styles.savebox}>
                     <TouchableOpacity onPress={() =>
                       {
 
@@ -304,7 +312,7 @@ class Maps extends React.Component {
                       /// posting the image info to mongo db
                     }}>
                         <View style={styles.savebuttons}>
-                          <Text style={styles.savebuttonText}>save new location</Text>
+                          <Text style={styles.savebuttonText}> Save </Text>
                         </View>
                     </TouchableOpacity>
                   </View>
@@ -318,6 +326,29 @@ class Maps extends React.Component {
 
 
 const styles = StyleSheet.create({
+  map: {
+    flex: 1,
+  },
+  // marker: {
+  //   color: '#0076ff',
+  // },
+  locationMarker: {
+    borderRadius: 20/2,
+    // color: '#8c8c8c',
+  },
+  modalbody:{
+    flex: 1,
+  },
+  modal: {
+    backgroundColor: 'transparent',
+    flexDirection: 'column',
+    margin: 0,
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'transparent',
+  },
   imagePartition1: {
     flex: 4,
     backgroundColor: 'green',
@@ -331,143 +362,94 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange',
     flexDirection: 'row',
   },
-  locationsmodelbody:{
+  locationsmodalbody:{
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,255,0.5)',
+    backgroundColor: 'rgba(255,255,255,0.5)',
   },
-  /////////////////////////
   locationPress: {
     height: 40,
     width: 40,
     borderRadius: 40/2,
-    backgroundColor: 'blue',
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  locationMarker: {
-    height: 20,
-    width: 20,
-    borderRadius: 20/2,
-    backgroundColor: 'yellow',
-  },
-  savebuttons:{
-    backgroundColor: "purple"
-  },
-  savebuttonText:{
-    fontSize: 22,
-  },
-  savebox:{
-    flex: 1.5,
-    backgroundColor: 'yellow',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleBox:{
-    flex: 2,
-    backgroundColor: 'green',
-    alignItems: 'center',
+  nameBox: {
+    height: 51,
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    backgroundColor: 'yellow',
-  },
-  nameBox:{
-    flex: 2,
-    justifyContent: 'center',
-  },
-  name:{
-    fontSize: 20,
+  name: {
+    fontSize: 12,
+    fontFamily: 'Helvetica',
+    color: '#525252',
     backgroundColor: 'white',
-    margin: 5,
-    marginLeft: 30,
-    marginRight: 30,
+    height: 50,
+    padding: 10,
   },
   descriptionBox:{
-    flex: 6,
-    backgroundColor: 'blue',
+    height: 281,
   },
   description: {
-    flex: 1.5,
-    fontSize: 20,
+    fontFamily: 'Helvetica',
+    color: '#525252',
+    height: 280,
     backgroundColor: 'white',
-    margin: 10,
-    marginLeft: 25,
-    marginRight: 25,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   imageBox:{
-    flex: 3,
-    backgroundColor: 'pink',
     flexDirection: 'row',
-  },
-  buttonbox:{
-    flex:1,
-    backgroundColor: 'green',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-  },
-  buttons:{
-    backgroundColor: 'orange',
-
-  },
-  buttonText: {
-    fontSize: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
   },
   addNewLocationBox: {
-    backgroundColor: 'orange',
-    flex: 0.5,
-    marginTop: 80,
-    margin: 30,
-    borderWidth: 0.5,
-  },
-  modelbody:{
+    backgroundColor: '#e9e9e9',
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'rgba(0,0,255,0.5)',
   },
-////////////// below maybe shite
-  modal: {
-    backgroundColor: 'transparent',
-    flexDirection: 'column',
-    margin: 0,
-  },
-  addNewCragButton: {
-    alignItems: 'center',
+  headerbutton: {
+    flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: 'yellow',
-    flex: .5,
-    marginTop: 5,
-    marginBottom: 5,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#0076ff',
+    borderRadius: 8,
+    height: 60,
+    width: 140,
   },
-  addNewCragBox: {
-    flex: 7,
-    backgroundColor: 'grey',
+  header: {
+    height: 64,
+    backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  marker: {
-    width: 20,
+  headerText: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+  },
+  statusbar: {
     height: 20,
-    borderRadius: 20/2,
-    backgroundColor: 'purple',
+    backgroundColor: 'white',
   },
-
-  header: {
-    flex: 3,
-    backgroundColor: 'orange',
+  addbutton: {
+    color: '#0076ff',
+    fontFamily: 'Helvetica',
+    fontWeight: 'bold',
   },
-  map: {
-    flex: 97,
+  buttonbox: {
+    height: 40,
+    width: 40,
   },
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'transparent',
-  },
+  savebuttonText: {
+    fontWeight: 'bold',
+    color: '#0076ff',
+  }
 });
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Maps);
-// export default (Maps);
