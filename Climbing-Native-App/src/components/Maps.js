@@ -48,31 +48,23 @@ class Maps extends React.Component {
   }
 
   _takeImage = async () => {
-    let takeResult64 = await ImagePicker.launchCameraAsync({
+    let takeResult = await ImagePicker.launchCameraAsync({
       base64: true
     });
-    if (!takeResult64.cancelled) {
-      this.setState({ imageB64: takeResult64.base64 });
-    }
-
-    const takeResultUri = await ImagePicker.launchImageLibraryAsync({})
-    if (!takeResultUri.cancelled) {
-      this.setState({ imageUri: takeResultUri.uri });
+    if (!takeResult.cancelled) {
+      this.setState({ imageB64: takeResult.base64 });
+      this.setState({ imageUri: takeResult.uri });
     }
   };
 
   _pickImage = async (name) => {
-    const resultB64 = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       base64: true
     })
 
-    if (!resultB64.cancelled) {
-      this.setState({ imageB64: resultB64.base64 });
-    }
-
-    const resultUri = await ImagePicker.launchImageLibraryAsync({})
-    if (!resultUri.cancelled) {
-      this.setState({ imageUri: resultUri.uri });
+    if (!result.cancelled) {
+      this.setState({ imageB64: result.base64 });
+      this.setState({ imageUri: result.uri });
     }
   };
 

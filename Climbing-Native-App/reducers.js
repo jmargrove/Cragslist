@@ -3,25 +3,9 @@ const defaultState = {
     {
       name: 'location...',
       description: 'description...',
-      imageUri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/QsN6MSmwh952Hpw',
+      imageUri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/4YrQvnMojcDfSdo',
       coordinate: {latitude: 41.390205, longitude: 2.154007 },
       id: 'jhdbacbebakhcelbrw',
-    }
-    ,
-    {
-      name: 'location...',
-      description: 'description...',
-      imageUri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/QsN6MSmwh952Hpw',
-      coordinate: {latitude: 41.0, longitude: 2.0 },
-      id: 'chjlblajberubaflce',
-    }
-    ,
-    {
-      name: 'location...',
-      description: 'description...',
-      imageUri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/QsN6MSmwh952Hpw',
-      coordinate: {latitude: 41.5, longitude: 2.2 },
-      id: 'djshbachjebrlajdldacl21341',
     }
   ],
   locationToView: {
