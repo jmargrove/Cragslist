@@ -5,6 +5,7 @@ const defaultState = {
       description: 'description...',
       imageUri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/4YrQvnMojcDfSdo',
       coordinate: {latitude: 41.390205, longitude: 2.154007 },
+      scend: true,
       id: 'jhdbacbebakhcelbrw',
     }
   ],
@@ -20,7 +21,7 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
 
-  console.log("reducer working....", action.obj)
+  // console.log("reducer working....", action.obj)
   if (action.type === 'INIT_LOCATIONS') {
     return {...state, locations: [...action.obj]}
   }

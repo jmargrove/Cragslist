@@ -1,5 +1,10 @@
 import React, { Component }  from 'react';
-import { TouchableHighlight, TouchableOpacity, TextInput, StyleSheet, Text, View, Image, Button } from 'react-native';
+import { TouchableHighlight,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  Text,
+  View, Image, Button, Switch } from 'react-native';
 import { Navigator, NativeModules } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -44,6 +49,7 @@ class Maps extends React.Component {
       coordinate: {latitude: 41.390205, longitude: 2.154007 },
       filterLocationID: null,
       filterLocationObj: null,
+      scend: false,
     };
   }
 
@@ -246,7 +252,7 @@ class Maps extends React.Component {
                   </View>
                   <View style={styles.nameBox}>
                     <TextInput
-                      onPress={(text) => this.setState({name: ''})}
+                      onFocus={(text) => this.setState({name: ''})}
                       onChangeText={(text) => this.setState({name: text})}
                       value={this.state.name}
                       style={styles.name}/>
@@ -255,7 +261,7 @@ class Maps extends React.Component {
                     <TextInput
                       multiline={true}
                       numberOfLines={4}
-                      onPress={(text) => this.setState({description: ''})}
+                      onFocus={(text) => this.setState({description: ''})}
                       onChangeText={(text) => this.setState({description: text})}
                       value={this.state.description}
                       style={styles.description}/>
@@ -275,6 +281,9 @@ class Maps extends React.Component {
                         </View>
                       </TouchableOpacity>
                     </View>
+                    <View>
+                      <Switch value={this.state.scend} onValueChange={() => this.setState({scend: !this.state.scend})}/>
+                    </View>
                     <TouchableOpacity onPress={() =>
                       {
 
@@ -290,6 +299,7 @@ class Maps extends React.Component {
                           doneWish: true,
                           coordinate: this.state.coordinate,
                           id: ident,
+                          scend: this.state.scend,
                         }
 
                         postToMong(newLoc).then(e => console.log(e.json()))
@@ -298,6 +308,8 @@ class Maps extends React.Component {
                         this.setModalVisible(!this.state.modalVisible)
                         /// adding new location to the reducer for rendering
                         this.props.addLoc(newLoc)
+
+                        this.setState({scend: false, name: 'name...', description: 'description...'})
 
                       })
                       .catch(e => {console.log(e)});
@@ -369,7 +381,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   name: {
-    fontSize: 12,
+    fontSize: 20,
     fontFamily: 'Helvetica',
     color: '#525252',
     backgroundColor: 'white',
@@ -377,12 +389,13 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   descriptionBox:{
-    height: 281,
+    height: 250,
   },
   description: {
+    fontSize: 20,
     fontFamily: 'Helvetica',
     color: '#525252',
-    height: 280,
+    height: 230,
     backgroundColor: 'white',
     paddingTop: 10,
     paddingLeft: 10,
@@ -390,7 +403,7 @@ const styles = StyleSheet.create({
   },
   imageBox:{
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,

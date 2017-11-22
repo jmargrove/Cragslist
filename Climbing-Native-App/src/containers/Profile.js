@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { connect } from 'react-redux';
+
+
+const mapStateToProps = (state) => ({
+  locations: state.locations,
+  newLocation: state.newLocation,
+  locationToView: state.locationToView,
+})
 
 
 class Profile extends React.Component {
@@ -20,8 +28,11 @@ state = {
     {'uri': 'https://www.dropbox.com/s/soqgmvzzpw3sg7m/dreamcrag-05.jpg?dl=1', 'id': 5, 'name': 'Yosemite'},
   ]
 }
-render() {
 
+render() {
+  console.log("the props.........", (this.props.locations.filter(el => {
+    return el.scend === true
+  })))
 return (
   <View style={styles.wholepage}>
 
@@ -67,11 +78,14 @@ return (
   </View>
 
     <View style={styles.cragsdiv} >
-      <Text style={styles.h1}>Your Crags</Text>
+      <Text style={styles.h1}> scend </Text>
       <ScrollView style={styles.list} horizontal={true} scrollEnabled={true} >
-            {this.state.yourcrags.map( (el, index) =>(
+            {(this.props.locations.filter(el => {
+              return el.scend === true
+              })).map( (el, index) =>(
+
               <View  key={el.id} style={styles.backgroundimage}>
-                <Image key={el.id} style={styles.backgroundimage2} source={{uri: el.uri}} />
+                <Image key={el.id} style={styles.backgroundimage2} source={{uri: el.imageUri}} />
               </View>
             ) )}
 
@@ -81,9 +95,11 @@ return (
     <View style={styles.wishdiv} >
       <Text style={styles.h1}>Your Dream Destinations</Text>
       <ScrollView style={styles.list} horizontal={true} scrollEnabled={true} >
-          {this.state.dreamcrags.map( (el, index) =>(
+          {(this.props.locations.filter(el => {
+              return el.scend === false
+              })).map( (el, index) =>(
             <View  key={el.id} style={styles.backgroundimage}>
-              <Image key={el.id} style={styles.backgroundimage2} source={{uri: el.uri}} />
+              <Image key={el.id} style={styles.backgroundimage2} source={{uri: el.imageUri}} />
             </View>
           ) )}
       </ScrollView>
@@ -142,7 +158,7 @@ const styles = StyleSheet.create({
   backgroundimage2: {
     width: 120,
     height: 120,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     marginRight: 10
   },
   h1 : {
@@ -169,4 +185,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Profile;
+export default connect(mapStateToProps, null)(Profile);
