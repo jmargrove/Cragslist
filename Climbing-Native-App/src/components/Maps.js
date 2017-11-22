@@ -126,7 +126,7 @@ class Maps extends React.Component {
         <View style={styles.marker}><Ionicons
           name={'ios-pin'}
           size={50}
-          style={styles.marker}
+          style={{color: '#0076ff'}}
         /></View>
       </MapView.Marker>
       {theProps.locations.map(marker => (
@@ -139,7 +139,7 @@ class Maps extends React.Component {
               <Ionicons
               name={'ios-ribbon'}
               size={35}
-              style={styles.locationMarker}
+              style={{color: '#0076ff'}}
             /></View>
           </View>
         </MapView.Marker>
@@ -321,12 +321,8 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  // marker: {
-  //   color: '#0076ff',
-  // },
   locationMarker: {
     borderRadius: 20/2,
-    // color: '#8c8c8c',
   },
   modalbody:{
     flex: 1,
