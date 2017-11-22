@@ -5,11 +5,12 @@ const Koa = require('koa');
 const app = new Koa();
 const controler = require('./controler.js')
 
+
 router.post('/imageAWS', koaBody({
   multipart: true
 }), controler.postImage)
 // router.post('/model-data', controler.modelData)
 // router.post('/optimize', controler.modelOptimized)
-router.post('/retrieveImage', controler.retrieveImage)
+router.post('/postToMong', koaBody(),controler.postToMong)
 
 module.exports = router

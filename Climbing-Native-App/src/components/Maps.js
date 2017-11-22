@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import randomatic from 'randomatic';
 import { viewLocation } from './../../action.js'
 import uploadImageAsync from './../functions/aws.js'
-import uploadImag from './../functions/fetch.js'
+import postToMong from './../functions/postToMong.js'
 import uuid from 'uuid/v4';
 import AWS from 'aws-sdk';
 
@@ -37,7 +37,8 @@ class Maps extends React.Component {
       modalVisibleView: false,
       name: 'location...',
       description: 'description...',
-      image: null,
+      imageB64: null,
+      imageUri: null,
       coordinate: {latitude: 41.390205, longitude: 2.154007 },
       filterLocationID: null,
       filterLocationObj: null,
@@ -46,25 +47,24 @@ class Maps extends React.Component {
 
   _takeImage = async () => {
     let result = await ImagePicker.launchCameraAsync({});
-    sendToAWS(result)
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
   };
 
-  _pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
+  _pickImage = async (name) => {
+    const resultB64 = await ImagePicker.launchImageLibraryAsync({
       base64: true
     })
 
-    // console.log(' ');
-    // console.log('======= RESULT');
-    // console.log(Object.keys(result));
-    // console.log('=[END]= RESULT');
-    // console.log(' ');
+    if (!resultB64.cancelled) {
+      this.setState({ imageB64: resultB64.base64 });
+    }
 
-    // this.setState({ image: result.uri });
-    uploadImageAsync(result.base64);
+    const resultUri = await ImagePicker.launchImageLibraryAsync({})
+    if (!resultUri.cancelled) {
+      this.setState({ imageUri: resultUri.uri });
+    }
   };
 
   setModalVisible(visible) {
@@ -87,7 +87,7 @@ class Maps extends React.Component {
 
 
     // uploadImageAsync('/Users/jamesmargrove/Desktop/Screen Shot 2017-11-10 at 12.14.55.png')
-    this._pickImage();
+    // this._pickImage();
 
     }
 
@@ -142,12 +142,12 @@ class Maps extends React.Component {
     }
 
   ifImage(theProps){
-    return (<Image source={{uri: theProps.locationToView.image}}
+    return (<Image source={{uri: theProps.locationToView.imageUri}}
     style={{ resizeMode: 'cover', flex: 1 }}/>)
   }
 
   ifInfo(theProps){
-    console.log('the props that are usefull', theProps)
+    // console.log('the props that are usefull', theProps)
     return(
       <View style={{flex: 1}}>
         <View style={{flex: 1, justifyContent: 'space-around', flexDirection: 'row', backgroundColor: 'red'}}>
@@ -264,14 +264,27 @@ class Maps extends React.Component {
                     <View style={styles.savebox}>
                     <TouchableOpacity onPress={() =>
                       {
+                      const newLoc = {
+                        name: this.state.name,
+                        description: this.state.description,
+                        imageUri: this.state.imageUri,
+                        imageB64: this.state.imageB64,
+                        coordinate: this.state.coordinate,
+                        id: randomatic('aA0', 15),
+                      }
+
+                      postToMong(newLoc).then(e => console.log(e.json()))
+                      .catch(e => {console.log(e)});
+
                       this.setModalVisible(!this.state.modalVisible)
-                      this.props.addLoc({
-                      name: this.state.name,
-                      description: this.state.description,
-                      image: this.state.image,
-                      coordinate: this.state.coordinate,
-                      id: randomatic('aA0', 15),
-                    })}}>
+                      /// adding new location to the reducer for rendering
+                      this.props.addLoc(newLoc)
+                      /// uploading the image to aws s3
+                      uploadImageAsync(newLoc.imageB64, newLoc.id)
+                      .then(e => console.log(e.json()))
+                      .catch(e => {console.log(e)});
+                      /// posting the image info to mongo db
+                    }}>
                         <View style={styles.savebuttons}>
                           <Text style={styles.savebuttonText}>save new location</Text>
                         </View>

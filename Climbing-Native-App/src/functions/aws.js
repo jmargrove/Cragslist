@@ -1,22 +1,9 @@
-// import uuid from 'uuid/v4';
-// import AWS from 'aws-sdk/dist/aws-sdk-react-native';
 
-
-async function uploadImageAsync(blob) {
-  let apiUrl = 'http://localhost:8080/imageAWS';
-  // let uriParts = uri.split('.');
-  // let fileType = uriParts[uriParts.length - 1];
-
-  let formData = new FormData();
-  formData.append('photo', blob, 'filename.png');
-
-  // console.log(' ');
-  // console.log('======= FORM DATA');
-  // console.log(formData);
-  // console.log('=[END]= FORM DATA');
-  // console.log(' ');
-
-  let options = {
+async function uploadImageAsync(blob, name) {
+  const apiUrl = 'http://192.168.0.36:8080/imageAWS';
+  const formData = new FormData();
+  formData.append(name, blob, 'filename.png');
+  const options = {
     method: 'POST',
     body: formData,
     headers: {
