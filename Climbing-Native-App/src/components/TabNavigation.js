@@ -51,32 +51,7 @@ export const TabNavigation = TabNavigator({
       ),
     },
   },
-  // CameraComp: {
-  //   screen: CameraComp,
-  //   navigationOptions: {
-  //     tabBarLabel: 'Camera',
-  //     tabBarIcon: ({ tintColor, focused }) => (
-  //       <Ionicons
-  //         name={focused ? 'ios-camera' : 'ios-camera-outline'}
-  //         size={27}
-  //         style={{ color: tintColor }}
-  //       />
-  //     ),
-  //   },
-  // },
-  addNewCrag: {
-    screen: addLocation,
-    navigationOptions: {
-      tabBarLabel: 'Add Location',
-      tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? 'ios-pin' : 'ios-pin-outline'}
-          size={27}
-          style={{ color: tintColor }}
-        />
-      ),
-    },
-  }
 });
+
 
 export default TabNavigation;
