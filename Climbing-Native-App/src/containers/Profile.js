@@ -66,8 +66,12 @@ return (
 
         </View>
         <View style={styles.profiledata2}>
-          <Text>32</Text>
-          <Text>4</Text>
+          <Text>{(this.props.locations.filter(el => {
+            return el.scend === true
+          })).length}</Text>
+          <Text style={{textAlign: 'center'}}>{(this.props.locations.filter(el => {
+            return el.scend === false
+          })).length}</Text>
           <Text>120</Text>
         </View>
 

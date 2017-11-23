@@ -281,7 +281,8 @@ class Maps extends React.Component {
                         </View>
                       </TouchableOpacity>
                     </View>
-                    <View>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                      <Text style={styles.savebuttonText}>Scend:</Text>
                       <Switch value={this.state.scend} onValueChange={() => this.setState({scend: !this.state.scend})}/>
                     </View>
                     <TouchableOpacity onPress={() =>

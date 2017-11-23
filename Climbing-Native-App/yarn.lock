@@ -1808,6 +1808,10 @@ dot-case@^1.1.0:
   dependencies:
     sentence-case "^1.1.2"
 
+dotenv@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+
 duplexer2@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.0.2.tgz#c614dcf67e2fb14995a91711e5a617e8a60a31db"
@@ -4801,18 +4805,12 @@ react-native-animatable@^1.2.3:
   dependencies:
     prop-types "^15.5.10"
 
-"react-native-aws3@git+https://github.com/punchh/react-native-aws3.git":
+react-native-aws3@^0.0.8:
   version "0.0.8"
-  resolved "git+https://github.com/punchh/react-native-aws3.git#d16dde98ca9d656a914ec8e4cd92ec19b3dac8ab"
+  resolved "https://registry.yarnpkg.com/react-native-aws3/-/react-native-aws3-0.0.8.tgz#9a18789ae0cedfb40d29b1f69799a8af4f9927e8"
   dependencies:
     buffer "^4.5.1"
     crypto-js "^3.1.6"
-
-react-native-blur@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-blur/-/react-native-blur-3.2.2.tgz#5bfb50638d148982c9560436554ed01d77d6d07d"
-  dependencies:
-    prop-types "^15.5.10"
 
 react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
