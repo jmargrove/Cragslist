@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
 class Profile extends React.Component {
 state = {
   yourcrags: [
-    {'uri': 'https://www.dropbox.com/s/ayeaxpigk4f3xf4/crags-01.jpg?dl=1', 'id': 1, },
+    {'uri': 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/static-photos/crags-01.jpg?dl=1', 'id': 1, },
     {'uri': 'https://www.dropbox.com/s/ji7zagapczrvtzs/crags-02.jpg?dl=1', 'id': 2, },
     {'uri': 'https://www.dropbox.com/s/5y5sgps2z5x3nr2/crags-03.jpg?dl=1', 'id': 3, },
     {'uri': 'https://www.dropbox.com/s/q2veumxjvupf6o0/crags-04.jpg?dl=1', 'id': 4, },
@@ -39,7 +39,7 @@ return (
     <View style={styles.third1}>
       <View style={styles.imagediv} >
         <Image style={styles.backgroundimage} source={{
-        uri: 'https://www.dropbox.com/s/lrd5he3tlyto9ef/profile-06.png?dl=1'
+        uri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/static-photos/profile-06.png'
       }}/>
       </View>
       <View style={styles.profiledata} >

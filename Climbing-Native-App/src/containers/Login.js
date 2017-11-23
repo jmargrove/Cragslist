@@ -28,7 +28,7 @@ class Login extends React.Component {
       <View style={styles.container}>
         <View style={styles.imagecontainer}>
           <Image style={styles.backgroundimage} source={{
-            uri: 'https://www.dropbox.com/s/6zwwyqerokvjll0/cragslist-homescreen-06.jpg?dl=1'
+            uri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/static-photos/cragslist-homescreen-06.jpg?dl=1'
           }}/>
         </View>
         <View style={styles.home}>

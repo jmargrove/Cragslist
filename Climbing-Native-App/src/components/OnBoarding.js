@@ -28,7 +28,7 @@ render() {
         <View style={styles.container}>
           <View style={styles.imagecontainer}>
             <Image style={styles.backgroundimage} source={{
-              uri: 'https://www.dropbox.com/s/2xub9ntzzraayt8/cragslist-homescreen-10.jpg?dl=1'
+              uri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/static-photos/cragslist-homescreen-10.jpg'
             }}/>
           </View>
           <View style={styles.home}>
@@ -39,7 +39,7 @@ render() {
         <View style={styles.container}>
           <View style={styles.imagecontainer}>
             <Image style={styles.backgroundimage} source={{
-              uri: 'https://www.dropbox.com/s/ljjx7wzy4cpptg7/cragslist-homescreen-02.jpg?dl=1'
+              uri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/static-photos/cragslist-homescreen-02.jpg'
             }}/>
           </View>
           <View style={styles.home}>
@@ -54,7 +54,7 @@ render() {
         <View style={styles.container}>
           <View style={styles.imagecontainer}>
             <Image style={styles.backgroundimage} source={{
-              uri: 'https://www.dropbox.com/s/yfhslq1yyt0i70n/cragslist-homescreen-05.jpg?dl=1'
+              uri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/static-photos/cragslist-homescreen-05.jpg'
             }}/>
           </View>
           <View style={styles.home}>
@@ -69,7 +69,7 @@ render() {
         <View style={styles.container}>
           <View style={styles.imagecontainer}>
             <Image style={styles.backgroundimage} source={{
-              uri: 'https://www.dropbox.com/s/qwi9vorzwx3t0bb/cragslist-homescreen-04.jpg?dl=1'
+              uri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/static-photos/cragslist-homescreen-04.jpg'
             }}/>
           </View>
           <View style={styles.home}>
@@ -84,7 +84,7 @@ render() {
         <View style={styles.container}>
           <View style={styles.imagecontainer}>
             <Image style={styles.backgroundimage} source={{
-              uri: 'https://www.dropbox.com/s/rpgig8a4m1lcidn/cragslist-homescreen-11.jpg?dl=1'
+              uri: 'https://s3-eu-west-1.amazonaws.com/james.margrove/climbing-app/static-photos/cragslist-homescreen-11.jpg'
             }}/>
           </View>
           <View style={styles.home}>
