@@ -82,7 +82,7 @@ return (
   </View>
 
     <View style={styles.cragsdiv} >
-      <Text style={styles.h1}> scend </Text>
+      <Text style={styles.h1}> Scend </Text>
       <ScrollView style={styles.list} horizontal={true} scrollEnabled={true} >
             {(this.props.locations.filter(el => {
               return el.scend === true
@@ -97,7 +97,7 @@ return (
     </View>
 
     <View style={styles.wishdiv} >
-      <Text style={styles.h1}>Your Dream Destinations</Text>
+      <Text style={styles.h1}>Wish List</Text>
       <ScrollView style={styles.list} horizontal={true} scrollEnabled={true} >
           {(this.props.locations.filter(el => {
               return el.scend === false

@@ -35,7 +35,7 @@ class Login extends React.Component {
         <Text style={styles.logo}>Cragslist</Text>
         <View style={styles.boxes}>
           <TextInput style={styles.inputBox}/>
-          <TextInput style={styles.inputBox}/>
+          <TextInput secureTextEntry={true} style={styles.inputBox}/>
         </View>
         </View>
         <View style={styles.buttonscontainer}>

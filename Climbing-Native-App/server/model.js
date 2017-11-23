@@ -13,7 +13,7 @@ sendToAWS = async (ctx, next) => {
   ///////// amazon webservices
   const albumBucketName = process.env.AWS_BUCKET;
   const bucketRegion = process.env.AWS_BUCKET_REGION;
-  const IdentityPoolId = process.env.AWS_IDENT_POOL_ID;
+  const IdentityPoolId = 'eu-west-1:2326fc41-82f5-4be7-875b-b8c11805ed3d';
 
   await AWS.config.update({
     region: bucketRegion,
