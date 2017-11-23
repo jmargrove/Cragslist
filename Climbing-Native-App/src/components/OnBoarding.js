@@ -4,7 +4,6 @@ import Swiper from 'react-native-swiper';
 import { Font } from 'expo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
 class OnBoarding extends React.Component {
 
   state = {

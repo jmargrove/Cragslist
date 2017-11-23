@@ -11,6 +11,10 @@ class Login extends React.Component {
     fontLoaded: false,
   };
 
+  onLogin = ()=> {
+    this.props.navigation.navigate('Profile')
+  }
+
   async componentWillMount(){
     await Font.loadAsync({
       'Pacifico-Regular': require('./../../assets/Fonts/Pacifico/Pacifico-Regular.ttf'),
@@ -35,9 +39,9 @@ class Login extends React.Component {
         </View>
         </View>
         <View style={styles.buttonscontainer}>
-          <TouchableOpacity style={styles.firstbutton} onPress={e=> console.log(e)}>
+          <TouchableOpacity style={styles.firstbutton} onPress={this.onLogin}>
             <View style={styles.buttonbody}>
-               <Text style={styles.buttontext}>Login</Text>
+               <Text style={styles.buttontext} onPress={this.onLogin}>Login</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={e=> console.log(e)}>
